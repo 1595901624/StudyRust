@@ -1,11 +1,11 @@
 fn main() {
-    let a = 5;
+    let mut a = 5;
 
     let b = 6;
 
     let c = 7;
 
-    let x = a + b + c;
+    let mut x = a + b + c;
 
     println!("a + b + c = {}", x);
 
