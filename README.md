@@ -19,7 +19,7 @@
 
 ——*如果你没有被Rust的编译器毒打过，请不要说你学过Rust*。
 
-#### 博客更新地址
+#### 博客地址
 
 * [简书](https://www.jianshu.com/u/573f6a58cd12)
 * [CSDN](https://blog.csdn.net/a1595901624)
