@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rust Wasm 测试</title>
+</head>
+
+<script type="module">
+    import init, {sum} from "./pkg/rust_wasm.js";
+    
+    init().then(() => {
+        var result = sum(5, 6);
+        document.write("wasm sum 5 + 6 = " + result)
+        console.log(result);
+    });
+</script>
+
+<body>
+
+</body>
+</html>
