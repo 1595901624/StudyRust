@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rust Wasm 测试</title>
+</head>
+
+<script type="module">
+    import init, {alert_by_rust, dom, test_setTimeout} from "./pkg/rust_wasm_dom.js";
+    
+    init().then(() => {
+        // alert_by_rust("hello world!")
+        dom()
+    });
+
+    
+</script>
+
+<body>
+    <!-- 声明的div节点 -->
+    <div id="test"></div>
+</body>
+</html>

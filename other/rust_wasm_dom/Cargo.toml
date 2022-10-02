@@ -1,0 +1,15 @@
+[package]
+name = "rust_wasm_dom"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+wasm-bindgen = "0.2.83"
+
+web-sys = { version = "0.3.60", features = ["Window", "Document", "Element", "Node"] }
+js-sys = "0.3.60"
