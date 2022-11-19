@@ -1,5 +1,5 @@
 use std::rc::Rc;
-    
+
 fn main() {
     // 创建一个字符串 rust
     let a: Rc<String> = Rc::new(String::from("rust"));
