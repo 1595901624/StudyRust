@@ -7,7 +7,7 @@ mod model;
 #[tokio::main]
 async fn main() {
     // 请填入自己账号的openai 的 api_key
-    let api_key = "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";
+    let api_key = "";
 
     // 对话内容
     let prompt = "chatgpt是什么";
