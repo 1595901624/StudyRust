@@ -154,6 +154,14 @@ Rust是一门系统编程语言，专注于安全，尤其是并发安全，支�
 
 017-Rust 中级教程 第17课——引用的lifetime（2）
 
+018-Rust 中级教程 第18课——trait object（1）
+
+019-Rust 中级教程 第19课——trait object（2）
+
+020-Rust 中级教程 第20课——Box（2）
+
+020-Rust 中级教程 第21课——Drop trait
+
 ##### Part Ext
 
 * rust 与 wasm
@@ -163,6 +171,8 @@ Rust是一门系统编程语言，专注于安全，尤其是并发安全，支�
 * 抖音短视频解析工具
 
 * 抖音短视频解析工具（GUI）
+
+* 使用 Rust 实现与 ChatGPT 对话
 
 未完待续...
 
