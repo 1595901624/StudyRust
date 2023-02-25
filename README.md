@@ -160,7 +160,7 @@ Rust是一门系统编程语言，专注于安全，尤其是并发安全，支�
 
 020-Rust 中级教程 第20课——Box（2）
 
-020-Rust 中级教程 第21课——Drop trait
+021-Rust 中级教程 第21课——Drop trait
 
 ##### Part Ext
 
