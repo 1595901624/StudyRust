@@ -1,9 +1,10 @@
 use std::io::Read;
 use std::process::Command;
-use std::thread::sleep;
+use std::thread::{current, sleep};
 use std::time::Duration;
+use device_query::{DeviceEvents, DeviceQuery, DeviceState, Keycode};
 
-const WIDTH: usize = 80;
+const WIDTH: usize = 50;
 const HEIGHT: usize = 10;
 
 fn main() {
@@ -12,20 +13,20 @@ fn main() {
     let mut map_vec = create_map();
     // 2.创建蛇
     let mut snake = create_snake();
-    // let device_state = DeviceState::new();
-    //
+    let device_state = DeviceState::new();
+
     // let _ = device_state.on_key_down(|key| {
     //     println!("Keyboard key down: {:#?}", key);
     // });
-
+    let mut current_direction = Direction::RIGHT;
     loop {
         clear_screen();
         // 3.将蛇加入地图
         add_snake_to_map(&snake, &mut map_vec);
         // 打印地图与蛇
         print_map(map_vec);
-        // input_control(&snake, &mut map_vec);
-        move_snake(&mut snake, &mut map_vec, Direction::RIGHT);
+        current_direction = input_control(&mut snake, &mut map_vec, current_direction, &device_state);
+        // move_snake(&mut snake, &mut map_vec, current_direction);
 
         sleep(Duration::from_millis(snake.speed));
     }
@@ -33,6 +34,7 @@ fn main() {
     //Command::new("cmd.exe").arg("/c").arg("pause").status().expect("clear error!");
 }
 
+#[derive(Clone, Copy)]
 enum Direction {
     UP,
     DOWN,
@@ -145,28 +147,64 @@ fn clear_screen() {
     Command::new("cmd.exe").arg("/c").arg("cls").status().expect("clear error!");
 }
 
-///
-fn input_control(snake: &Snake, map: &mut [[&'static str; WIDTH]; HEIGHT]) {
-    let mut input: [u8; 1] = [0];
-    std::io::stdin().read(&mut input).expect("input error!");
-    println!("{}", input[0]);
-    let control = char::from(input[0]);
-    match control {
-        'w' => {
-            println!("上");
+/// 键盘控制
+fn input_control(snake: &mut Snake,
+                 map: &mut [[&'static str; WIDTH]; HEIGHT],
+                 direction: Direction,
+                 device_state: &DeviceState) -> Direction {
+    // ss
+    let mut dir = direction;
+    // match control {
+    //     'w' => {
+    //         dir = Direction::UP;
+    //         move_snake(snake, map, Direction::UP);
+    //     }
+    //     's' => {
+    //         dir = Direction::DOWN;
+    //         move_snake(snake, map, Direction::DOWN);
+    //     }
+    //     'a' => {
+    //         dir = Direction::LEFT;
+    //         move_snake(snake, map, Direction::LEFT);
+    //     }
+    //     'd' => {
+    //         dir = Direction::RIGHT;
+    //         move_snake(snake, map, Direction::RIGHT);
+    //     }
+    //     _ => {
+    //         move_snake(snake, map, direction);
+    //     }
+    // }
+    let keycodes = device_state.get_keys();
+    if !keycodes.is_empty() {
+        let keycode = keycodes.get(0);
+        if let Some(key) = keycode {
+            match key {
+                Keycode::A => {
+                    dir = Direction::LEFT;
+                    move_snake(snake, map, Direction::LEFT);
+                }
+                Keycode::D => {
+                    dir = Direction::RIGHT;
+                    move_snake(snake, map, Direction::RIGHT);
+                }
+                Keycode::S => {
+                    dir = Direction::DOWN;
+                    move_snake(snake, map, Direction::DOWN);
+                }
+                Keycode::W => {
+                    dir = Direction::UP;
+                    move_snake(snake, map, Direction::UP);
+                }
+                _ => {
+                    move_snake(snake, map, direction);
+                }
+            }
         }
-        's' => {
-            println!("下");
-        }
-        'a' => {
-            println!("左");
-        }
-        'd' => {
-            println!("右");
-        }
-        _ => {}
+    } else {
+        move_snake(snake, map, direction);
     }
-
+    return dir;
     // println!("keys = {:?}", device_state.get_keys())
 }
 
