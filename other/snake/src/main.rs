@@ -33,7 +33,7 @@ fn main() {
         random_new_food(&mut food, &snake, &mut map);
         // 打印地图、蛇、食物
         print_map(map);
-        current_direction = input_control(&mut snake, &mut map, current_direction, &device_state);
+        current_direction = input_control(&mut snake, &mut food, &mut map, current_direction, &device_state);
         // move_snake(&mut snake, &mut map, current_direction);
 
         sleep(Duration::from_millis(snake.speed));
@@ -61,8 +61,8 @@ fn random_new_food(food: &mut Food, snake: &Snake, map: &mut [[&'static str; WID
     // let head = snake.head;
     // let body = &(snake.body);
     let mut rng = rand::thread_rng();
-    let x = rng.gen_range(1..WIDTH - 1);
-    let y = rng.gen_range(1..HEIGHT - 1);
+    let x = rng.gen_range(1..HEIGHT - 1);
+    let y = rng.gen_range(1..WIDTH - 1);
     map[x][y] = "▣";
     food.position = [x, y];
     food.eat = false;
@@ -78,7 +78,7 @@ enum Direction {
 
 /// 创建食物
 fn create_food() -> Food {
-    let position = [7, 6];
+    let position = [5, 8];
     return Food { position, eat: false };
 }
 
@@ -100,39 +100,48 @@ fn add_snake_to_map(snake: &Snake, map: &mut [[&'static str; WIDTH]; HEIGHT]) {
 }
 
 /// 移动蛇
-fn move_snake(snake: &mut Snake, map: &mut [[&'static str; WIDTH]; HEIGHT], direction: Direction) {
+fn move_snake(snake: &mut Snake, food: &mut Food, map: &mut [[&'static str; WIDTH]; HEIGHT], direction: Direction) {
     let before_head = snake.head;
-
+    // 是否吃到了食物
+    let mut eat = false;
     match direction {
         Direction::UP => {
             // 蛇头往前移动一格，以前的蛇头变成蛇身的位置
-            map[before_head[0]][before_head[1]] = "▣";
             snake.head[0] -= 1;
-            map[before_head[0]][before_head[1]] = "●";
+            eat = snake.head == food.position;
+            map[before_head[0]][before_head[1]] = "▣";
+            map[snake.head[0]][snake.head[1]] = "●";
         }
         Direction::DOWN => {
             // 蛇头往前移动一格，以前的蛇头变成蛇身的位置
-            map[before_head[0]][before_head[1]] = "▣";
             snake.head[0] += 1;
-            map[before_head[0]][before_head[1]] = "●";
+            eat = snake.head == food.position;
+            map[before_head[0]][before_head[1]] = "▣";
+            map[snake.head[0]][snake.head[1]] = "●";
         }
         Direction::LEFT => {
             // 蛇头往前移动一格，以前的蛇头变成蛇身的位置
-            map[before_head[0]][before_head[1]] = "▣";
             snake.head[1] -= 1;
-            map[before_head[0]][before_head[1]] = "●";
+            eat = snake.head == food.position;
+            map[before_head[0]][before_head[1]] = "▣";
+            map[snake.head[0]][snake.head[1]] = "●";
         }
         Direction::RIGHT => {
+            // 先判断是否吃到了食物
+            snake.head[1] += 1;
+            eat = snake.head == food.position;
             // 蛇头往前移动一格，以前的蛇头变成蛇身的位置
             map[before_head[0]][before_head[1]] = "▣";
-            snake.head[1] += 1;
-            map[before_head[0]][before_head[1]] = "●";
+            map[snake.head[0]][snake.head[1]] = "●";
         }
     }
     // 蛇身去掉最后一个元素
-    if !snake.body.is_empty() {
+    if !snake.body.is_empty() && !eat {
         let snake_foot = snake.body.remove(snake.body.len() - 1);
         map[snake_foot[0]][snake_foot[1]] = " ";
+    }
+    if eat {
+        food.eat = true;
     }
     // 插入蛇身第一个元素
     snake.body.insert(0, before_head);
@@ -195,6 +204,7 @@ fn clear_screen() {
 
 /// 键盘控制
 fn input_control(snake: &mut Snake,
+                 food: &mut Food,
                  map: &mut [[&'static str; WIDTH]; HEIGHT],
                  direction: Direction,
                  device_state: &DeviceState) -> Direction {
@@ -206,27 +216,27 @@ fn input_control(snake: &mut Snake,
             match key {
                 Keycode::A => {
                     dir = Direction::LEFT;
-                    move_snake(snake, map, Direction::LEFT);
+                    move_snake(snake, food, map, Direction::LEFT);
                 }
                 Keycode::D => {
                     dir = Direction::RIGHT;
-                    move_snake(snake, map, Direction::RIGHT);
+                    move_snake(snake, food, map, Direction::RIGHT);
                 }
                 Keycode::S => {
                     dir = Direction::DOWN;
-                    move_snake(snake, map, Direction::DOWN);
+                    move_snake(snake, food, map, Direction::DOWN);
                 }
                 Keycode::W => {
                     dir = Direction::UP;
-                    move_snake(snake, map, Direction::UP);
+                    move_snake(snake, food, map, Direction::UP);
                 }
                 _ => {
-                    move_snake(snake, map, direction);
+                    move_snake(snake, food, map, direction);
                 }
             }
         }
     } else {
-        move_snake(snake, map, direction);
+        move_snake(snake, food, map, direction);
     }
     return dir;
     // println!("keys = {:?}", device_state.get_keys())
