@@ -1,11 +1,12 @@
 use std::process::Command;
+use std::thread;
 use std::thread::{sleep};
 use std::time::Duration;
-use device_query::{DeviceQuery, DeviceState, Keycode};
+use device_query::{DeviceEvents, DeviceQuery, DeviceState, Keycode};
 use rand::Rng;
 
-const WIDTH: usize = 50;
-const HEIGHT: usize = 10;
+const WIDTH: usize = 100;
+const HEIGHT: usize = 25;
 
 type Map = [[&'static str; WIDTH]; HEIGHT];
 
@@ -20,11 +21,11 @@ fn main() {
 
     let device_state = DeviceState::new();
 
-    // let _ = device_state.on_key_down(|key| {
-    //     println!("Keyboard key down: {:#?}", key);
-    // });
     let mut current_direction = Direction::RIGHT;
+
     loop {
+        let keycodes = device_state.get_keys();
+
         clear_screen();
         // 将蛇加入地图
         add_snake_to_map(&snake, &mut map);
@@ -34,7 +35,7 @@ fn main() {
         random_new_food(&mut food, &snake, &mut map);
         // 打印地图、蛇、食物
         print_map(map);
-        current_direction = input_control(&mut snake, &mut food, &mut map, current_direction, &device_state);
+        current_direction = input_control(&mut snake, &mut food, &mut map, current_direction, &keycodes);
         // move_snake(&mut snake, &mut map, current_direction);
         // 判断游戏是否结束
         if is_game_over(&snake) {
@@ -57,7 +58,7 @@ fn add_food_to_map(food: &Food, map: &mut Map) {
 }
 
 /// 随机生成食物
-/// 随机算法还有点儿小bug
+/// 随机算法这里仅是简单实现，生成食物的时候需要避开蛇的身体
 fn random_new_food(food: &mut Food, snake: &Snake, map: &mut Map) {
     if !food.eat {
         // 如果当前的食物没有被吃掉，则不生成新的食物
@@ -90,7 +91,7 @@ fn create_food() -> Food {
 /// 创建蛇
 fn create_snake() -> Snake {
     let head = [5, 6];
-    let speed = 1000;
+    let speed = 200;
     let body = vec![[5, 5], [5, 4]];
     return Snake { head, speed, body };
 }
@@ -231,9 +232,9 @@ fn input_control(snake: &mut Snake,
                  food: &mut Food,
                  map: &mut Map,
                  direction: Direction,
-                 device_state: &DeviceState) -> Direction {
+                 keycodes: &Vec<Keycode>) -> Direction {
     let mut dir = direction;
-    let keycodes = device_state.get_keys();
+    dbg!(keycodes);
     if !keycodes.is_empty() {
         let keycode = keycodes.get(0);
         if let Some(key) = keycode {
