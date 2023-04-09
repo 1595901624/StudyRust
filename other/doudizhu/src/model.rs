@@ -1,3 +1,4 @@
+/// 玩家
 #[non_exhaustive]
 #[derive(Debug, Clone)]
 pub struct Player {
@@ -39,7 +40,30 @@ impl Player {
     }
 
     pub fn add_card(&mut self, card: Card) {
+        self.add_card_and_sort(card, false);
+    }
+
+    pub fn add_card_and_sort(&mut self, card: Card, sort: bool) {
         self.cards.push(card);
+        if sort {
+            self.sort();
+        }
+    }
+
+    pub fn add_cards(&mut self, cards: &mut Vec<Card>) {
+        self.add_cards_and_sort(cards, false);
+    }
+
+    pub fn add_cards_and_sort(&mut self, cards: &mut Vec<Card>, sort: bool) {
+        self.cards.append(cards);
+        if sort {
+            self.sort();
+        }
+    }
+
+    /// 排序
+    pub fn sort(&mut self) {
+        self.cards.sort_by_key(|item| { -item.get_priority() });
     }
 }
 

@@ -13,19 +13,20 @@ fn main() {
     let mut player = Player::default();
 
     // 发牌
-    let under_cards = deal_cards(cards, &mut cpu_player1, &mut cpu_player2, &mut player);
+    let mut under_cards = deal_cards(cards, &mut cpu_player1, &mut cpu_player2, &mut player);
     print_cards(&mut cpu_player1, &mut cpu_player2, &mut player);
+
+    // 展示底牌
+    show_under_cards(&under_cards);
 
     // 征询地主
     ask_landlord(&mut cpu_player1, &mut cpu_player2, &mut player);
     println!("cpu_player1: {}, cpu_player2: {}, player: {}", cpu_player1.is_landlord(), cpu_player2.is_landlord(), player.is_landlord());
 
-    // dbg!(&cpu_player1);
-    // dbg!(&cpu_player2);
-    // dbg!(&player);
-    // dbg!(&under_cards);
+    // 给地主发底牌
+    landlord_get_under_cards(&mut under_cards, &mut cpu_player1, &mut cpu_player2, &mut player);
 
-    // dbg!(&under_cards);
+    print_cards(&mut cpu_player1, &mut cpu_player2, &mut player);
 }
 
 /// 1. 创建扑克牌
@@ -67,9 +68,12 @@ fn deal_cards(cards: Vec<Card>,
             player3.add_card(cards[index].to_owned());
         }
     }
-    player1.get_cards().sort_by_key(|item| { -item.get_priority() });
-    player2.get_cards().sort_by_key(|item| { -item.get_priority() });
-    player3.get_cards().sort_by_key(|item| { -item.get_priority() });
+    player1.sort();
+    player2.sort();
+    player3.sort();
+    // player1.get_cards().sort_by_key(|item| { -item.get_priority() });
+    // player2.get_cards().sort_by_key(|item| { -item.get_priority() });
+    // player3.get_cards().sort_by_key(|item| { -item.get_priority() });
     // player1.set_cards();
     under_cards
 }
@@ -82,10 +86,10 @@ fn ask_landlord(player1: &mut Player,
     loop {
         println!("你是否要当地主？Y:是,N:否");
         let input = get_input();
-        if input.trim() == "Y" {
+        if input.trim() == "Y" || input.trim() == "y" {
             main_player.set_landlord(true);
             break;
-        } else if input.trim() == "N" {
+        } else if input.trim() == "N" || input.trim() == "n" {
             main_player.set_landlord(false);
             break;
         } else {
@@ -104,6 +108,27 @@ fn ask_landlord(player1: &mut Player,
     }
 }
 
+/// 4.向地主发底牌
+fn landlord_get_under_cards(cards: &mut Vec<Card>,
+                            player1: &mut Player,
+                            player2: &mut Player,
+                            player3: &mut Player) {
+    if player1.is_landlord() {
+        player1.add_cards_and_sort(cards, true);
+        return;
+    }
+
+    if player2.is_landlord() {
+        player2.add_cards_and_sort(cards, true);
+        return;
+    }
+
+    if player3.is_landlord() {
+        player3.add_cards_and_sort(cards, true);
+        return;
+    }
+}
+
 fn get_input() -> String {
     let mut input = String::new();
     std::io::stdin().read_line(&mut input).expect("");
@@ -118,15 +143,25 @@ fn shuffle_cards(cards: &mut Vec<Card>) {
 fn print_cards(player1: &mut Player,
                player2: &mut Player,
                main_player: &mut Player) {
+    println!("玩家1的牌面：");
     for card in player1.get_cards().iter() {
         print!("{} ", card.get_card_string());
     }
-    println!();
+    println!("\n玩家2的牌面：");
     for card in player2.get_cards().iter() {
         print!("{} ", card.get_card_string());
     }
-    println!();
+    println!("\n我的牌面：");
     for card in main_player.get_cards().iter() {
+        print!("{} ", card.get_card_string());
+    }
+    println!();
+}
+
+/// 展示底牌
+fn show_under_cards(cards: &Vec<Card>) {
+    println!("\n底牌：");
+    for card in cards {
         print!("{} ", card.get_card_string());
     }
     println!();
