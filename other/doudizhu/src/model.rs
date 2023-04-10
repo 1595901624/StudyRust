@@ -2,6 +2,7 @@
 #[non_exhaustive]
 #[derive(Debug, Clone)]
 pub struct Player {
+    id: i32,
     // 卡牌
     cards: Vec<Card>,
     // 是否是地主
@@ -9,15 +10,17 @@ pub struct Player {
 }
 
 impl Player {
-    pub fn new(cards: Vec<Card>, landlord: bool) -> Self {
+    pub fn new(id: i32, cards: Vec<Card>, landlord: bool) -> Self {
         Self {
+            id,
             cards,
             landlord,
         }
     }
 
-    pub fn default() -> Self {
+    pub fn new_with_id(id: i32) -> Self {
         Self {
+            id,
             cards: vec![],
             landlord: false,
         }

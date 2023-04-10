@@ -1,16 +1,21 @@
 use rand::seq::SliceRandom;
 use rand::thread_rng;
 use crate::model::{Card, Player};
+use crate::room::Room;
 
 mod model;
+mod room;
 
 fn main() {
     let cards = create_cards();
 
     // 创建玩家
-    let mut cpu_player1 = Player::default();
-    let mut cpu_player2 = Player::default();
-    let mut player = Player::default();
+    let mut cpu_player1 = Player::new_with_id(1);
+    let mut cpu_player2 = Player::new_with_id(2);
+    let mut player = Player::new_with_id(3);
+
+    let room = Room::new(vec![&cpu_player1, &cpu_player2, &player]);
+
 
     // 发牌
     let mut under_cards = deal_cards(cards, &mut cpu_player1, &mut cpu_player2, &mut player);
