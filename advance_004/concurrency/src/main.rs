@@ -19,9 +19,15 @@ fn join_handle() {
         // 返回一个 String 类型
         return "hello".to_string();
     });
+    let handle_finished = handle.is_finished();
+    println!("handle_finished: {}", handle_finished);
+
+    let thread = handle.thread();
+    println!("{:?}", thread);
 
     // 父线程接收子线程运行结束的结果
     let result = handle.join().unwrap();
+
     println!("{}", result);
 }
 
