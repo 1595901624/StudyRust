@@ -4,6 +4,46 @@ use std::thread::sleep;
 use std::time::Duration;
 
 fn main() {
+    // 1. 发送者与接收者
+    // test1();
+
+    // 2. 多发送者
+    test2();
+}
+
+/// 多发送者
+fn test2() {
+    let (sender, receiver) = channel::<String>();
+
+    let sender1 = sender.clone();
+    // let sender2 = sender.clone();
+
+    let handle1 = thread::spawn(move || {
+        sleep(Duration::from_millis(1000));
+        let hello = "hello".to_string();
+        sender1.send(hello).unwrap();
+    });
+
+    let handle2 = thread::spawn(move || {
+        sleep(Duration::from_millis(1000));
+        let rust = "rust".to_string();
+        sender.send(rust).unwrap();
+    });
+
+    let handle3 = thread::spawn(move || {
+        // 迭代
+        receiver.into_iter().for_each(|item| {
+            println!("receive_hello: {}", item);
+        });
+    });
+
+    handle1.join().unwrap();
+    handle2.join().unwrap();
+    handle3.join().unwrap();
+}
+
+/// 发送者与接收者
+fn test1() {
     let (sender, receiver) = channel::<String>();
 
     let handle1 = thread::spawn(move || {
