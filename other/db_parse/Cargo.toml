@@ -1,0 +1,11 @@
+[package]
+name = "db_parse"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+reqwest = "0.11.17"
+scraper = "0.16.0"
+tokio = {version = "1.28.0", features = ["full"]}
