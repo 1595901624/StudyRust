@@ -13,8 +13,10 @@ pub fn clear_screen() {
 
 /// 获取键盘按键
 pub fn keyboard_hit() -> Option<KeyCode> {
+    // 等待 0 秒，立即返回。
     match poll(Duration::from_millis(0)) {
         Ok(true) => match read() {
+            // 如果存在按键，则返回键盘按键
             Ok(Event::Key(key)) => {
                 // println!("{:?}", key);
                 return Some(key.code);
@@ -25,4 +27,5 @@ pub fn keyboard_hit() -> Option<KeyCode> {
             None
         }
     }
+
 }

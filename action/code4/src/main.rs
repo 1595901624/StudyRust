@@ -15,11 +15,10 @@ mod direction;
 mod snake;
 mod food;
 mod util;
+mod constant;
+mod test;
 
-const WIDTH: usize = 40;
-const HEIGHT: usize = 15;
-
-type Map = [[&'static str; WIDTH]; HEIGHT];
+type Map = [[&'static str; constant::WIDTH]; constant::HEIGHT];
 
 /// 将食物加入地图
 fn add_food_to_map(food: &Food, map: &mut Map) {
@@ -31,8 +30,7 @@ fn add_food_to_map(food: &Food, map: &mut Map) {
     map[position[0]][position[1]] = "▣";
 }
 
-/// 随机生成食物
-/// 随机算法这里仅是简单实现，生成食物的时候需要避开蛇的身体
+/// 随机生成食物,生成食物的时候需要避开蛇的身体
 fn random_new_food(food: &mut Food, snake: &Snake, map: &mut Map) {
     if !food.eat {
         // 如果当前的食物没有被吃掉，则不生成新的食物
@@ -43,8 +41,8 @@ fn random_new_food(food: &mut Food, snake: &Snake, map: &mut Map) {
     let (x, y) = loop {
         let mut rng = rand::thread_rng();
         // 避免靠近墙体生成食物（降低难度）
-        let x = rng.gen_range(3..HEIGHT - 3);
-        let y = rng.gen_range(3..WIDTH - 3);
+        let x = rng.gen_range(3..constant::HEIGHT - 3);
+        let y = rng.gen_range(3..constant::WIDTH - 3);
         // 生成的元素不能与蛇重叠
         if head != [x, y] && !body.contains(&[x, y]) {
             break (x, y);
@@ -64,7 +62,7 @@ fn create_food() -> Food {
 /// 创建蛇
 fn create_snake() -> Snake {
     let head = [5, 6];
-    let speed = 300;
+    let speed = 200;
     let body = vec![[5, 5], [5, 4]];
     return Snake { head, speed, body };
 }
@@ -130,8 +128,8 @@ fn move_snake(snake: &mut Snake, food: &mut Food, map: &mut Map, direction: Dire
 fn is_game_over(snake: &Snake) -> bool {
     let head = snake.head;
     // 如果蛇头触及到边界 触发游戏结束
-    if head[0] == 0 || head[0] == HEIGHT - 1
-        || head[1] == 0 || head[1] == WIDTH - 1 {
+    if head[0] == 0 || head[0] == constant::HEIGHT - 1
+        || head[1] == 0 || head[1] == constant::WIDTH - 1 {
         return true;
     }
     let body_list = &snake.body;
@@ -162,7 +160,7 @@ fn print_map(map: Map) {
 fn create_map() -> Map {
     let block = "■";
     let empty = " ";
-    let mut map = [[empty; WIDTH]; HEIGHT];
+    let mut map = [[empty; constant::WIDTH]; constant::HEIGHT];
     for i in 0..map.len() {
         for j in 0..map[i].len() {
             // 第一行和最后一行边界
