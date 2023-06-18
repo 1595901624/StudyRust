@@ -1,8 +1,6 @@
-use std::cell::{Ref, RefCell};
+use std::cell::{RefCell};
 use std::fmt::Debug;
-use std::option::IntoIter;
 use std::rc::Rc;
-use std::thread::sleep;
 
 #[derive(Debug, PartialEq, Clone)]
 pub struct LinkedList<T> where T: PartialEq + Debug + Clone {
