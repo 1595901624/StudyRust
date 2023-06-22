@@ -6,6 +6,14 @@ mod test;
 
 fn main() {}
 
+#[test]
+fn calc1() {
+    let c = Complex::new(1.0, 3.0);
+    // -c 等价于 c.neg()
+    println!("c = {:?}", -c);
+    println!("c = {:?}", c.neg());
+}
+
 /// 四则运算
 #[test]
 fn calc2() {
@@ -57,11 +65,13 @@ fn calc3() {
 }
 
 #[test]
-fn calc1() {
-    let c = Complex::new(1.0, 3.0);
-    // -c 等价于 c.neg()
-    println!("c = {:?}", -c);
-    println!("c = {:?}", c.neg());
+fn test_eq() {
+    let c1 = Complex::new(1.0, 3.0);
+    let c2 = Complex::new(2.0, 4.0);
+    let c3 = Complex::new(1.0, 3.0);
+
+    assert_eq!(c1, c3);
+    assert_ne!(c1, c2);
 }
 
 #[test]

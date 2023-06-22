@@ -1,3 +1,4 @@
+use std::cmp::Ordering;
 use std::ops::Mul;
 
 #[test]
@@ -22,4 +23,29 @@ fn test_custom_type() {
     let example = Example { value: 10 };
     let result = example * 10;
     println!("example * 10 = {}", result);
+}
+
+#[test]
+fn test_ord() {
+    #[derive(Copy, Clone, Debug, Eq, PartialEq)]
+    struct Example {
+        value: i32,
+    }
+
+    impl PartialOrd for Example {
+        fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+            if self.value < other.value {
+                Some(Ordering::Less)
+            } else if self.value > other.value {
+                Some(Ordering::Greater)
+            } else {
+                Some(Ordering::Equal)
+            }
+        }
+    }
+
+    let example1 = Example { value: 10 };
+    let example2 = Example { value: 20 };
+
+    println!("example1 > example2 ? {}", example1 > example2);
 }

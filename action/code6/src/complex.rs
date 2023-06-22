@@ -3,7 +3,7 @@ use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Not, Sub, Su
 
 /// 复数
 /// a + bi (i^2 = -1)
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Complex<T> {
     // 实部
     a: T,
@@ -110,3 +110,4 @@ impl<T> Not for Complex<T> where T: Not<Output=T> {
         Complex::new(!self.a, !self.b)
     }
 }
+
