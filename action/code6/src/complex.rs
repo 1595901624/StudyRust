@@ -1,9 +1,9 @@
 use std::fmt::{Debug};
-use std::ops::{Add, AddAssign, Deref, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Not, Sub, SubAssign};
+use std::ops::{Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign};
 
 /// 复数
 /// a + bi (i^2 = -1)
-#[derive(Copy, Clone, Debug, Eq, PartialEq, Ord, PartialOrd)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub struct Complex<T> {
     // 实部
     a: T,
@@ -19,12 +19,6 @@ impl<T> Complex<T> {
         }
     }
 }
-
-// impl<T> Display for Complex<T> where T: Display + PartialOrd {
-//     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-//         write!(f, "{}+{}i", self.a, self.b)
-//     }
-// }
 
 /// 加法
 impl<T> Add for Complex<T> where T: Add<Output=T> {
@@ -45,20 +39,24 @@ impl<T> Sub for Complex<T> where T: Sub<Output=T> {
 }
 
 /// 乘法
-impl<T> Mul for Complex<T> where T: Mul<Output=T> {
+impl<T> Mul for Complex<T>
+    where T: Mul<Output=T> + Add<Output=T> + Sub<Output=T> + Copy {
     type Output = Self;
 
     fn mul(self, rhs: Self) -> Self::Output {
-        Complex::new(self.a * rhs.a, self.b * rhs.b)
+        // (ac－bd)+(bc+ad)i
+        Complex::new(self.a * rhs.a - self.b * rhs.b, self.b * rhs.a + self.a * rhs.b)
     }
 }
 
 /// 除法
-impl<T> Div for Complex<T> where T: Div<Output=T> {
+impl<T> Div for Complex<T>
+    where T: Add<Output=T> + Sub<Output=T> + Mul<Output=T> + Div<Output=T> + Copy {
     type Output = Self;
 
     fn div(self, rhs: Self) -> Self::Output {
-        Complex::new(self.a / rhs.a, self.b / rhs.b)
+        // (ac+bd)/(c^2 + d^2) + (bc-ad)/(c^2 + d^2) * i
+        Complex::new((self.a * rhs.a + self.b * rhs.b) / (rhs.a * rhs.a + rhs.b * rhs.b), (self.b * rhs.a - self.a * rhs.b) / (rhs.a * rhs.a + rhs.b * rhs.b))
     }
 }
 
@@ -79,18 +77,26 @@ impl<T> SubAssign for Complex<T> where T: SubAssign {
 }
 
 /// *=
-impl<T> MulAssign for Complex<T> where T: MulAssign {
+impl<T> MulAssign for Complex<T>
+    where T: Mul<Output=T> + Add<Output=T> + Sub<Output=T> + Copy {
     fn mul_assign(&mut self, rhs: Self) {
-        self.a *= rhs.a;
-        self.b *= rhs.b;
+        // (ac－bd)+(bc+ad)i
+        let a = self.a * rhs.a - self.b * rhs.b;
+        let b = self.b * rhs.a + self.a * rhs.b;
+        self.a = a;
+        self.b = b;
     }
 }
 
 /// /=
-impl<T> DivAssign for Complex<T> where T: DivAssign {
+impl<T> DivAssign for Complex<T>
+    where T: Add<Output=T> + Sub<Output=T> + Mul<Output=T> + Div<Output=T> + Copy {
     fn div_assign(&mut self, rhs: Self) {
-        self.a /= rhs.a;
-        self.b /= rhs.b;
+        // (ac+bd)/(c^2 + d^2) + (bc-ad)/(c^2 + d^2) * i
+        let a = (self.a * rhs.a + self.b * rhs.b) / (rhs.a * rhs.a + rhs.b * rhs.b);
+        let b = (self.b * rhs.a - self.a * rhs.b) / (rhs.a * rhs.a + rhs.b * rhs.b);
+        self.a = a;
+        self.b = b;
     }
 }
 
@@ -126,8 +132,3 @@ impl<T> IndexMut<usize> for Complex<T> {
         }
     }
 }
-
-impl Deref {
-    
-}
-

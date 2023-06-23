@@ -1,4 +1,3 @@
-use std::cmp::Ordering;
 use std::ops::Mul;
 
 #[test]
@@ -84,8 +83,8 @@ fn test_ord() {
 /// 浮点数的比较
 #[test]
 fn test_float_ord() {
-    let a = f64::NAN;
-    let b = f64::NAN;
+    let a = f64::INFINITY;
+    let b = f64::NEG_INFINITY;
     println!("a > b ? {}", a > b);
     println!("a < b ? {}", a < b);
     println!("a = b ? {}", a == b);

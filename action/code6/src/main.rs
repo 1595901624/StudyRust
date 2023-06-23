@@ -1,12 +1,28 @@
-use std::ops::{Index, Mul, Neg, SubAssign};
+use std::ops::{ Mul, Neg};
 use crate::complex::Complex;
 
 mod complex;
 mod test;
 
-fn main() {}
+fn main() {
+    println!("**************一元运算符****************");
+    calc1();
+    println!();
 
-#[test]
+    println!("**************二元运算符****************");
+    calc2();
+    println!();
+
+    println!("**************比较运算符****************");
+    calc3();
+    println!();
+
+    println!("**************索引运算符****************");
+    test_index();
+    println!();
+}
+
+
 fn calc1() {
     let c = Complex::new(1.0, 3.0);
     // -c 等价于 c.neg()
@@ -15,7 +31,7 @@ fn calc1() {
 }
 
 /// 四则运算
-#[test]
+
 fn calc2() {
     let c1 = Complex::new(1.0, 3.0);
     let c2 = Complex::new(2.0, 4.0);
@@ -37,7 +53,7 @@ fn calc2() {
 }
 
 /// 自增运算
-#[test]
+
 fn calc3() {
     let c1 = Complex::new(1.0, 3.0);
     let c2 = Complex::new(2.0, 4.0);
@@ -74,7 +90,7 @@ fn test_eq() {
     assert_ne!(c1, c2);
 }
 
-#[test]
+
 fn test_index() {
     let mut c = Complex::new(1.0, 3.0);
 
