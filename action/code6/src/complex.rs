@@ -1,5 +1,5 @@
 use std::fmt::{Debug};
-use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Not, Sub, SubAssign};
+use std::ops::{Add, AddAssign, Deref, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Not, Sub, SubAssign};
 
 /// 复数
 /// a + bi (i^2 = -1)
@@ -103,11 +103,31 @@ impl<T> Neg for Complex<T> where T: Neg<Output=T> {
     }
 }
 
-impl<T> Not for Complex<T> where T: Not<Output=T> {
-    type Output = Self;
+/// 为 Complex 实现 [] 操作符，[0] 访问实部，[1] 访问虚部
+/// []
+impl<T> Index<usize> for Complex<T> {
+    type Output = T;
 
-    fn not(self) -> Self::Output {
-        Complex::new(!self.a, !self.b)
+    fn index(&self, index: usize) -> &Self::Output {
+        match index {
+            0 => &self.a,
+            1 => &self.b,
+            _ => panic!("index out of range"),
+        }
     }
+}
+
+impl<T> IndexMut<usize> for Complex<T> {
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+        match index {
+            0 => &mut self.a,
+            1 => &mut self.b,
+            _ => panic!("index out of range"),
+        }
+    }
+}
+
+impl Deref {
+    
 }
 

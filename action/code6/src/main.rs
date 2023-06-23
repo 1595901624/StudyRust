@@ -1,4 +1,4 @@
-use std::ops::{Mul, Neg, SubAssign};
+use std::ops::{Index, Mul, Neg, SubAssign};
 use crate::complex::Complex;
 
 mod complex;
@@ -75,7 +75,17 @@ fn test_eq() {
 }
 
 #[test]
-fn test() {
-    let c = Complex::new(1, 3);
-    println!("a = {:?}", !c);
+fn test_index() {
+    let mut c = Complex::new(1.0, 3.0);
+
+    println!("修改前: c[0] = {}", c[0]);
+    println!("修改前: c[1] = {}", c[1]);
+
+    c[0] = 2.0;
+    c[1] = 4.0;
+
+    println!("修改后: c[0] = {}", c[0]);
+    println!("修改后: c[1] = {}", c[1]);
+
+    println!("c = {:?}", c);
 }
