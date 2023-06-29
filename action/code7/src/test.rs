@@ -74,36 +74,3 @@ pub fn test_mutex() {
     let result = lanqiao.lock().unwrap();
     println!("{:?}", result);
 }
-
-#[test]
-fn test_future() {
-    use std::future::Future;
-    use std::pin::Pin;
-    use std::task::{Context, Poll};
-    use futures::FutureExt;
-
-    struct MyFuture {
-        count: usize,
-    }
-
-    impl Future for MyFuture {
-        type Output = usize;
-
-        fn poll(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
-            if self.count == 0 {
-                Poll::Ready(self.count)
-            } else {
-                println!("count: {}", self.count);
-                self.count -= 1;
-                cx.waker().wake_by_ref();
-                Poll::Pending
-            }
-        }
-    }
-
-    let mut future = MyFuture { count: 10 };
-    let mut cx = Context::from_waker(futures::task::noop_waker_ref());
-    while let Poll::Pending = future.poll_unpin(&mut cx) {
-        println!("polling");
-    }
-}

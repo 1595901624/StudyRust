@@ -8,19 +8,19 @@ const REGISTER_URL: &str = "https://chatgpt6.com/rest/user/register";
 
 #[tokio::main]
 async fn main() {
-    // let fetch_msg_url = "https://linshiyou.com/#/886@linshiyou.com";
-    // get(fetch_msg_url).await;
-    match get("https://www.baidu.com").await {
-        Ok(_) => {}
-        Err(e) => {
-            dbg!(e);
-        }
-    };
+    let fetch_msg_url = "https://linshiyou.com/#/fekken@linshiyou.com";
+    get(fetch_msg_url).await;
+    // match get("https://www.baidu.com").await {
+    //     Ok(_) => {}
+    //     Err(e) => {
+    //         dbg!(e);
+    //     }
+    // };
 }
 
 fn create_http_client() -> reqwest::Client {
     let proxy = reqwest::Proxy::all("http://114.233.70.231:9000").unwrap();
-    reqwest::Client::builder().proxy(proxy).build().unwrap()
+    reqwest::Client::builder().build().unwrap()
 }
 
 async fn get(url: &str) -> Result<(), reqwest::Error> {
