@@ -1,8 +1,7 @@
 mod test;
 
 use std::net::{IpAddr, SocketAddr};
-use std::thread;
-use std::time::Duration;
+use std::time::{Duration, SystemTime, UNIX_EPOCH};
 
 use tokio::net::TcpStream;
 use futures::{stream, StreamExt};
@@ -16,6 +15,7 @@ async fn main() {
 }
 
 async fn scan_ports_by_concurrency() {
+    let start_time = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_millis();
     let ip_string = "182.61.200.6";
     let ip = ip_string.parse::<IpAddr>().unwrap();
     let ports = stream::iter(PORTS.into_iter());
@@ -23,6 +23,8 @@ async fn scan_ports_by_concurrency() {
         scan_single_port(ip, *port)
     });
     x.await;
+    let end_time = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_millis();
+    println!("总共花费时间: {} ms", end_time - start_time);
 }
 
 async fn scan_ports_by_sequential() {
