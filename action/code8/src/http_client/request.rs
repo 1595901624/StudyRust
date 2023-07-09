@@ -29,14 +29,18 @@ impl RequestBodyBuilder for RequestBuilder {
     fn add_body(self, request_body: &RequestBody) -> RequestBuilder {
         let mut request_builder = self;
         if let Some(query) = &request_body.query {
+            let mut map = HashMap::with_capacity(query.len());
             for (key, value) in query {
-                request_builder = request_builder.query(&[(key, value)]);
+                map.insert(key, value);
             }
+            request_builder = request_builder.query(&map);
         }
         if let Some(form) = &request_body.form {
+            let mut map = HashMap::with_capacity(form.len());
             for (key, value) in form {
-                request_builder = request_builder.form(&[(key, value)]);
+                map.insert(key, value);
             }
+            request_builder = request_builder.form(&map);
         }
         if let Some(json) = &request_body.json {
             let mut map = HashMap::with_capacity(json.len());

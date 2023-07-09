@@ -7,9 +7,10 @@ use crate::http_client::response::Output;
 
 mod http_client;
 mod args;
+mod test;
 
 fn main() {
-    get_args();
+    // get_args();
 
     // 使用clap获取参数
     let args = Args::parse();
@@ -32,5 +33,3 @@ fn get_args() {
     let args: std::env::Args = std::env::args();
     println!("获取参数: {:?}", args);
 }
-
-
