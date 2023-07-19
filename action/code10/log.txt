@@ -1,0 +1,9 @@
+2023-07-18 14:37:59.775 [INFO] Hello, world!
+2023-07-18 14:38:11.987 [INFO] Hello, world!
+2023-07-18 14:38:53.810 [INFO] Hello, world!
+2023-07-18 14:39:56.645 [INFO] Hello, world!
+2023-07-18 14:46:42.943 [INFO] Hello, world!
+2023-07-18 14:48:16.133 [INFO] Hello, world!
+2023-07-18 14:48:24.434 [INFO] Hello, world!
+2023-07-18 14:48:47.655 [INFO] aad 5
+2023-07-19 21:56:57.987 [INFO] aad 5
