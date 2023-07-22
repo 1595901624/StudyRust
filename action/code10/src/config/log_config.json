@@ -1,0 +1,6 @@
+{
+  "log_level": "Info",
+  "log_file": "lanqiao.log",
+  "enable_write_file": true,
+  "enable_print_console": true
+}

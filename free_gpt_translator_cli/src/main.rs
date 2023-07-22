@@ -12,13 +12,13 @@ mod auth;
 const GPT_URL: &str = "https://chatgpt.qdymys.cn/api/chat-process";
 const GPT_CHAT_BOT: &str = "https://chatbot.theb.ai/api/chat-process";
 const GPT_TEST2: &str = "https://cbot3.skybyte.me/api/chat-process";
+const GPT_AI: &str = "https://chatgpt.vulcanlabs.co/api/v3/chat";
 
 #[tokio::main]
 async fn main() {
-
     let secret = "vulcan@v4-chatgpt";
     let token = "admin";
-    let time_exp = 5;
+    let time_exp = 30;
 
     let now = Utc::now();
     let exp = now + Duration::minutes(time_exp);

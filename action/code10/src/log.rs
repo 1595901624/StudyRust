@@ -2,8 +2,9 @@ use std::fs::OpenOptions;
 use std::io::Write;
 
 use chrono::Local;
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, PartialOrd, Ord, Eq, PartialEq)]
+#[derive(Debug, PartialOrd, Ord, Eq, PartialEq, Copy, Clone, Serialize, Deserialize)]
 pub enum LogLevel {
     Info,
     Debug,
@@ -12,6 +13,7 @@ pub enum LogLevel {
     Fatal,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Logger {
     // 日志文件路径
     log_file: Option<String>,
@@ -22,6 +24,19 @@ pub struct Logger {
     // 是否打印到控制台
     enable_print_console: bool,
 }
+
+/// 默认日志配置
+impl Default for Logger {
+    fn default() -> Self {
+        Logger {
+            log_file: None,
+            log_level: LogLevel::Info,
+            enable_write_file: false,
+            enable_print_console: true,
+        }
+    }
+}
+
 
 impl Logger {
     pub fn new(log_file: Option<String>,

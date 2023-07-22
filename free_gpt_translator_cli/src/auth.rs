@@ -18,9 +18,7 @@ fn hmac_sha256(data: &str, key: &str) -> String {
     mac.update(data.as_bytes());
     let result = mac.finalize().into_bytes();
     let bytes = &result[..];
-    // println!("{:?}", bytes);
-    // encode_string(String::from_utf8(bytes.to_vec()).unwrap())
-    // encode(String::from_utf8(result.as_slice().to_vec()))
+    encode_config(bytes, URL_SAFE_NO_PAD)
 }
 
 pub fn get_token(secret: &str, token: &str, exp: i64) -> String {

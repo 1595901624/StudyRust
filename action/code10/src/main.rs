@@ -1,19 +1,22 @@
+use std::env;
+use std::path::Path;
+use my_macro;
+use crate::log::Logger;
+
 mod log;
 mod log_macro;
-mod test;
+mod test_declarative;
+mod test_procedural;
 
 
 fn main() {
-    println!("Hello, world!");
+    // let logger = log_default!();
+    // logger.i("default ...");
 
-    // std::string::String::from("Hello, world!");
-    info!(format!("aad {}", 5));
-
-    // macro_rules! my_println {
-    //     ($arg:expr) => {
-    //         println!("The argument is: {}\n", $arg);
-    //     };
-    // }
-    // my_println!("rust");
+    info!("这是一条 info 日志");
+    debug!("这是一条 debug 日志");
+    warn!("这是一条 warn 日志");
+    error!("这是一条 error 日志");
+    fatal!("这是一条 fatal 日志");
 }
 
