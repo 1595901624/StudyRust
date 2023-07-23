@@ -1,6 +1,5 @@
 use std::env;
 use std::path::Path;
-use my_macro;
 use crate::log::Logger;
 
 mod log;
@@ -19,4 +18,3 @@ fn main() {
     error!("这是一条 error 日志");
     fatal!("这是一条 fatal 日志");
 }
-
