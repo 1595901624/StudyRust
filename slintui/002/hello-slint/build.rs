@@ -9,3 +9,4 @@ fn main() {
         println!("cargo:warning=compile ui/appwindow2.slint success\n");
     }
 }
+
