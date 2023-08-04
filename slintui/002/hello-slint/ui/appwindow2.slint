@@ -1,0 +1,11 @@
+import { Button, VerticalBox } from "std-widgets.slint";
+
+export component AppWindow2 inherits Window {
+    in-out property<int> counter: 42;
+    callback request-increase-value();
+    VerticalBox {
+        Text {
+            text: "hello world";
+        }
+    }
+}
