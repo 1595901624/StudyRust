@@ -1,31 +1,30 @@
 slint::include_modules!();
 
 fn main() -> Result<(), slint::PlatformError> {
-    // let ui = MarcoWindow::new()?;
-    // ui.run()
-
+    // 运行 通过 slint::slint! 宏来定义组件
+    MarcoWindow::new().unwrap().run().unwrap();
     // MarcoWindow2::new().unwrap().run().unwrap();
-    AppWindow::new().unwrap().run().unwrap();
-    // AppWindow2::new().unwrap().run().unwrap();
-
-    // MarcoWindow2::new().unwrap().show().unwrap();
-    // AppWindow::new().unwrap().show().unwrap();
+    // 运行 通过 slint_build::compile 生成的组件
+    // AppWindow::new().unwrap().run().unwrap();
     Ok(())
 }
 
-// 通过 slint::slint! 宏来定义组件
+// 通过 slint::slint! 宏来定义组件1
 slint::slint! {
     import { VerticalBox } from "std-widgets.slint";
     export component MarcoWindow inherits Window {
+        min-height: 100px;
+        min-width: 200px;
         VerticalBox { 
             Text {
                 color: red;
-                text: "Hello, world!";
+                text: "Hello, world! rust!!";
             }
          }
      }
 }
 
+// 通过 slint::slint! 宏来定义组件2
 slint::slint! {
     import { VerticalBox } from "std-widgets.slint";
     export component MarcoWindow2 inherits Window {
