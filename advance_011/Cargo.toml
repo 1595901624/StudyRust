@@ -1,0 +1,16 @@
+[package]
+name = "advance_011"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+# 这是用于`cargo build --release`和`cargo run --release`的默认配置文件。
+#[profile.release]
+#panic = "abort"
+
+# 这是用于`cargo build`和`cargo run`的默认配置文件。
+#[profile.dev]
+#panic = "abort"
