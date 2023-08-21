@@ -1,0 +1,27 @@
+// 定义组件 TitleText 标题文本
+component TitleText inherits Text {
+    color: black;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+// Window 组件
+export component MyApp inherits Window {
+    preferred-width: 200px;
+    preferred-height: 150px;
+    Rectangle {
+        width: 200px;
+        height: 150px;
+        background: burlywood;
+    }
+    TitleText {
+        x:0;
+        y:0;
+        text: "hello";
+    }
+    TitleText {
+        y:0;
+        x: 100px;
+        text: "world";
+    }
+}
