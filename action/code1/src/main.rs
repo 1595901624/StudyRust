@@ -1,13 +1,18 @@
 fn main() {
-    let value = vec![5, 12, 23, 45, 65, 66, 87, 98];
-    let result = binary_search(value, 12);
-    println!("查找结果: {}", result);
+    let value = [5, 12, 23, 45, 65, 66, 87, 98];
+    let result = binary_search(&value, 12);
+    match result {
+        Some(index) => {
+            println!("找到元素，索引值为：{}", index);
+        }
+        None => println!("未找到元素")
+    }
 }
 
 /// 二分查找
 /// `element` 待查找的元素
 /// `value` 待查找的数组
-fn binary_search(value: Vec<i32>, element: i32) -> i32 {
+fn binary_search(value: &[i32], element: i32) -> Option<usize> {
     // 初始化 两个端点的索引值
     let mut start = 0;
     let mut end = value.len() - 1;
@@ -19,7 +24,7 @@ fn binary_search(value: Vec<i32>, element: i32) -> i32 {
         // 如果待查找元素与中间元素相等，则查找成功，返回 mid
         if value[mid] == element {
             // mid 默认是 usize 类型，需要使用 as 转换为 i32 类型
-            return mid as i32;
+            return Some(mid);
         } else if value[mid] > element {
             // 如果待查找元素比中间元素小，则更新 end = mid - 1，
             end = mid - 1;
@@ -29,7 +34,7 @@ fn binary_search(value: Vec<i32>, element: i32) -> i32 {
         }
     }
     // 如果 start > end，则表明数组中不存在待查找元素，则查找失败，返回默认值 -1
-    return -1;
+    return None;
 }
 
 #[test]
