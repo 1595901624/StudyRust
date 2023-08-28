@@ -95,29 +95,7 @@ async fn main() {
 }
 
 async fn chat(Json(payload): Json<ChatBody>) -> String {
-    println!("{:?}", payload);
-    let mut headers = reqwest::header::HeaderMap::new();
-    headers.append("Authorization", header::HeaderValue::from_str(get_bearer().as_str()).unwrap());
-    headers.append("User-Agent", header::HeaderValue::from_static("Chat GPT Android 2.8.3 290"));
-    headers.append("Content-Type", header::HeaderValue::from_static("application/json"));
-
-    let res = reqwest::Client::new()
-        .post(GPT_AI)
-        .headers(headers)
-        .json(&payload)
-        .send()
-        .await;
-    // println!("{:?}", res);
-    if let Ok(response) = res {
-        if let Ok(result) = response.text().await {
-            println!("{}", result);
-            return result;
-        } else {
-            return "error".to_string();
-        }
-    } else {
-        return "error".to_string();
-    }
+    return "nihao!".to_string();
 }
 
 #[derive(serde::Deserialize, serde::Serialize, Debug)]
