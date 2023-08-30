@@ -1,6 +1,8 @@
+//! 这里定义系统相关的函数
 use std::process::Command;
 use std::time::Duration;
 use crossterm::event::{Event, KeyCode, poll, read};
+
 
 /// 清空屏幕
 pub fn clear_screen() {
@@ -27,5 +29,4 @@ pub fn keyboard_hit() -> Option<KeyCode> {
             None
         }
     }
-
 }
