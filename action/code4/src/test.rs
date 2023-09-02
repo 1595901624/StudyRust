@@ -39,26 +39,3 @@ fn test_cfg_property() {
         println!("hello linux!");
     }
 }
-
-#[test]
-fn test_move() {
-// 基本数据类型
-    let a = 3;
-    let b = a;
-
-    println!("a = {}, b = {}", a, b);
-
-    // String类型
-    let m = String::from("rust");
-    // 让渡所有权
-    let n = m;
-
-    // m 变为无法访问，下面的代码将会报错
-    // println!("m = {}, n = {}", m, n);
-
-    println!("n = {}", n);
-
-    // 变量遮蔽
-    let m = 5;
-    println!("m = {}", m);
-}
