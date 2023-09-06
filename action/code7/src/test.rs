@@ -61,6 +61,7 @@ pub fn test_mutex() {
             // 在子线程中，修改字符串的值
             let mut x: MutexGuard<String> = temp.lock().unwrap();
             x.push(char::from(97 + i));
+            drop(x);
         });
         handles.push(handle);
     }
