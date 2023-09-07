@@ -63,6 +63,61 @@ export component App inherits Window {
         }
     }
 
-    
 
+    // 对齐
+    export component AlignmentTest {
+        width: 400px;
+        height: 400px;
+        VerticalLayout {
+            HorizontalLayout {
+                alignment: stretch;
+                Rectangle { background: red; min-width: 10px; }
+                Rectangle { background: blue; min-width: 20px; }
+                Rectangle { background: green; min-width: 30px; }
+            }
+            HorizontalLayout {
+                alignment: start;
+                Rectangle { background: red; min-width: 10px; }
+                Rectangle { background: blue; min-width: 20px; }
+                Rectangle { background: green; min-width: 30px; }
+            }
+            HorizontalLayout {
+                alignment: center;
+                Rectangle { background: red; min-width: 10px; }
+                Rectangle { background: blue; min-width: 20px; }
+                Rectangle { background: green; min-width: 30px; }
+            }
+            HorizontalLayout {
+                alignment: end;
+                Rectangle { background: red; min-width: 10px; }
+                Rectangle { background: blue; min-width: 20px; }
+                Rectangle { background: green; min-width: 30px; }
+            }
+            HorizontalLayout {
+                alignment: space-between;
+                Rectangle { background: red; min-width: 10px; }
+                Rectangle { background: blue; min-width: 20px; }
+                Rectangle { background: green; min-width: 30px; }
+            }
+            HorizontalLayout {
+                alignment: space-around;
+                Rectangle { background: red; min-width: 10px; }
+                Rectangle { background: blue; min-width: 20px; }
+                Rectangle { background: green; min-width: 30px; }
+            }
+        }
+    }
+
+    export component ExportedComponentTest {
+        width: 400px;
+        height: 400px;
+
+        VerticalLayout {
+            alignment: end;
+            Rectangle { background: red; min-height: 10px; }
+            Rectangle { background: blue; min-height: 20px; }
+            Rectangle { background: green; min-height: 30px; }
+        }
+        
+    }
 }
