@@ -10,26 +10,32 @@ slint::slint! {
         width: 300px;
         height: 300px;
 
-        popup := PopupWindow {
-            Rectangle { height:100%; width: 100%; background: blue; }
-            x: 20px; y: 20px; height: 50px; width: 50px;
-        }
+        // popup := PopupWindow {
+        //     Rectangle { height:100%; width: 100%; background: blue; }
+        //     x: 20px; y: 20px; height: 50px; width: 50px;
+        // }
 
-        TouchArea {
-            height:100%; width: 100%;
-            clicked => { popup.show(); }
+        // TouchArea {
+        //     height:100%; width: 100%;
+        //     clicked => { popup.show(); }
+        // }
+
+        Image {
+            width: 200px;
+            height: 200px;
+            source: @image-url("assets/rustjson.png");
         }
     }
 
-    export component Example inherits Dialog {
-        Text {
-            text: "This is a dialog box";
-        }
-        StandardButton { kind: ok; }
-        StandardButton { kind: cancel; }
-        Button {
-        text: "More Info";
-        dialog-button-role: action;
-    }
+    // export component Example inherits Dialog {
+    //     Text {
+    //         text: "This is a dialog box";
+    //     }
+    //     StandardButton { kind: ok; }
+    //     StandardButton { kind: cancel; }
+    //     Button {
+    //     text: "More Info";
+    //     dialog-button-role: action;
+    // }
 }
 }

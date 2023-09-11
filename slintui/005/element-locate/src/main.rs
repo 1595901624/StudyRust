@@ -64,8 +64,8 @@ export component App inherits Window {
     }
 
 
-    // 对齐
-    export component AlignmentTest {
+    // 横向对齐
+    export component HorizontalLayoutAlignmentTest {
         width: 400px;
         height: 400px;
         VerticalLayout {
@@ -108,15 +108,53 @@ export component App inherits Window {
         }
     }
 
-    export component ExportedComponentTest {
+    // 纵向对齐
+    export component VerticalLayoutAlignmentTest {
         width: 400px;
         height: 400px;
 
-        VerticalLayout {
-            alignment: end;
-            Rectangle { background: red; min-height: 10px; }
-            Rectangle { background: blue; min-height: 20px; }
-            Rectangle { background: green; min-height: 30px; }
+        HorizontalLayout {
+            VerticalLayout {
+                alignment: stretch;
+                Rectangle { background: red; min-height: 10px; }
+                Rectangle { background: blue; min-height: 20px; }
+                Rectangle { background: green; min-height: 30px; }
+            }
+
+            VerticalLayout {
+                alignment: start;
+                Rectangle { background: red; min-height: 10px; }
+                Rectangle { background: blue; min-height: 20px; }
+                Rectangle { background: green; min-height: 30px; }
+            }
+
+            VerticalLayout {
+                alignment: center;
+                Rectangle { background: red; min-height: 10px; }
+                Rectangle { background: blue; min-height: 20px; }
+                Rectangle { background: green; min-height: 30px; }
+            }
+
+            VerticalLayout {
+                alignment: end;
+                Rectangle { background: red; min-height: 10px; }
+                Rectangle { background: blue; min-height: 20px; }
+                Rectangle { background: green; min-height: 30px; }
+            }
+
+            VerticalLayout {
+                alignment: space-between;
+                Rectangle { background: red; min-height: 10px; }
+                Rectangle { background: blue; min-height: 20px; }
+                Rectangle { background: green; min-height: 30px; }
+            }
+
+            VerticalLayout {
+                alignment: space-around;
+                Rectangle { background: red; min-height: 10px; }
+                Rectangle { background: blue; min-height: 20px; }
+                Rectangle { background: green; min-height: 30px; }
+            }
         }
         
     }
