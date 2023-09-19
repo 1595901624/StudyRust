@@ -97,4 +97,17 @@ slint::slint! {
             }
         }
     }
+
+    // for
+    export component ForExample {
+        width: 200px;
+        height: 150px;
+        HorizontalLayout {
+            Rectangle { background: red; }
+            for t in [ "Hello", "Rust", "Slint" ] : Text {
+                text: t;
+            }
+            Rectangle { background: cyan; }
+        }
+    }
 }
