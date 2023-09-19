@@ -67,6 +67,7 @@ slint::slint! {
 
     }
 
+    // 拉伸demo2
     component StretchExample2 inherits Window {
         width: 300px;
         height: 200px;
