@@ -19,6 +19,7 @@ fn main() {
 }
 
 slint::slint! {
+    // stretch demo1
     export component App inherits Window {
 
         out property <length> blue_rect_width: blue-rect.width;
@@ -64,5 +65,35 @@ slint::slint! {
 
         }
 
+    }
+
+    component StretchExample2 inherits Window {
+        width: 300px;
+        height: 200px;
+        VerticalLayout {
+            // 相同的拉伸因子（默认为1）：尺寸平均分配
+            hl1 := HorizontalLayout {
+                Rectangle { background: blue; }
+                Rectangle { background: yellow;}
+                Rectangle { background: green;}
+            }
+            // 在元素展开之前，具有较大最小宽度的元素会被分配更大的尺寸。
+            hl2 := HorizontalLayout {
+                Rectangle { background: cyan; min-width: 100px;}
+                Rectangle { background: magenta; min-width: 50px;}
+                Rectangle { background: gold;}
+            }
+            // 拉伸因子增加一倍：增长的幅度也增加一倍。
+            hl3 := HorizontalLayout {
+                Rectangle { background: navy; horizontal-stretch: 2;}
+                Rectangle { background: gray; }
+            }
+            // 所有没有最大宽度限制的元素的拉伸因子为0，因此它们会自由地增长。
+            hl4 := HorizontalLayout {
+                Rectangle { background: red; max-width: 20px; }
+                Rectangle { background: orange; horizontal-stretch: 0; }
+                Rectangle { background: pink; horizontal-stretch: 0; }
+            }
+        }
     }
 }
