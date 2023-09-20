@@ -99,7 +99,7 @@ slint::slint! {
     }
 
     // for
-    export component ForExample {
+    component ForExample {
         width: 200px;
         height: 150px;
         HorizontalLayout {
