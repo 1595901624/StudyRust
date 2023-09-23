@@ -6,7 +6,7 @@ fn main() {
 
 slint! {
     export component App inherits Window {
-        
+
     }
     // 网格布局
     component GridLayoutTest {
@@ -52,10 +52,10 @@ slint! {
 
     // Row元素
     component RowElementest {
-        GridLayout {
-            width: 300px;
-            height: 300px;
+        width: 300px;
+        height: 300px;
 
+        GridLayout {
             Row {
                 Rectangle {
                     background: red;
@@ -71,6 +71,57 @@ slint! {
                 }
                 Rectangle {
                     background: orange;
+                }
+            }
+        }
+    }
+
+    // 属性
+    component AttriibuteTest {
+        width: 300px;
+        height: 300px;
+
+        GridLayout {
+            rec1 := Rectangle {
+                row: 0;
+                col: 1;
+                rowspan: 2;
+                background: red;
+            }
+            rec2 := Rectangle {
+                row: 1;
+                background: green;
+            }
+            rec3 := Rectangle {
+                row: 2;
+                colspan: 2;
+                background: blue;
+            }
+        }
+    }
+
+    // 嵌套布局
+    component NestedLayoutTest {
+        width: 300px;
+        height: 300px;
+
+        GridLayout {
+            VerticalLayout {
+                row: 0;
+                Rectangle {
+                    background: red;
+                }
+                Rectangle {
+                    background: blue;
+                }
+            }
+            HorizontalLayout {
+                row: 1;
+                Rectangle {
+                    background: green;
+                }
+                Rectangle {
+                    background: yellow;
                 }
             }
         }
