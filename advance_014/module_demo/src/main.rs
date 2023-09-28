@@ -6,6 +6,8 @@ fn main() {
 
     outer_module::outer_function();
     outer_module::inner_module::inner_function();
+
+    my_file_mod::test();
 }
 
 // 模块demo
@@ -44,3 +46,4 @@ mod outer_module {
 // 文件模块
 mod my_file_mod;
 mod multi_file_mod;
+pub mod util;
