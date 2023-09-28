@@ -41,5 +41,6 @@ mod outer_module {
     }
 }
 
-// 单文件模块
+// 文件模块
 mod my_file_mod;
+mod multi_file_mod;
