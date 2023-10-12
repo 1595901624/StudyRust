@@ -10,6 +10,7 @@ fn fibonacci(n: u32) -> u32 {
     }
 }
 
+#[cfg(test)]
 #[test]
 fn test_fibonacci() {
     let x = fibonacci(10);
