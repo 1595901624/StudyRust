@@ -5,3 +5,19 @@ version = 3
 [[package]]
 name = "doc_demo"
 version = "0.1.0"
+dependencies = [
+ "gm-sm3",
+ "hex",
+]
+
+[[package]]
+name = "gm-sm3"
+version = "0.10.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ffe08d80bc64633ec6c4a33ff6523ebb3fc9a038735b1deb71fdc0f5c8a64f64"
+
+[[package]]
+name = "hex"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
