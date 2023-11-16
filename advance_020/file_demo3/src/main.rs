@@ -1,4 +1,8 @@
-use serde::{ Deserialize, Serialize};
-// use serde::Deserialize;
-// use serde::Serialize;
+use std::io::Read;
 
+fn main() {
+
+    // std::fs::read()
+
+    // let read:Box<dyn Read>
+}
