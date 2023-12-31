@@ -1,12 +1,18 @@
-use my_macro::my_func;
+use my_macro::{my_function_macro, script};
 
-my_func! {
-    // Java 语言
-    int a = 3;
+// 自定义语言
+script! {
+    int a = 6;
     int b = 4;
     System.out.println(a + b);
+    System.out.println("hello script!");
 }
 
 fn main() {
-    hello();
+    run_script();
+    // my_function_macro! {
+    //     println!("我在函数宏中...");
+    // }
+    //
+    // test_function_macro();
 }

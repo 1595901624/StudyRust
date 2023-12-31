@@ -7,3 +7,6 @@ edition = "2021"
 
 [lib]
 proc-macro = true
+
+[dependencies]
+regex = "1.10.2"

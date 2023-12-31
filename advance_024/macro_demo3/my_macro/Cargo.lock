@@ -12,13 +12,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "macro_demo3"
-version = "0.1.0"
-dependencies = [
- "my_macro",
-]
-
-[[package]]
 name = "memchr"
 version = "2.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
