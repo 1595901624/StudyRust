@@ -2,6 +2,7 @@ use proc_macro::{TokenStream, TokenTree};
 use std::fmt::format;
 
 
+/// 自定义派生宏
 #[proc_macro_derive(MyDebug)]
 pub fn custom(input: TokenStream) -> TokenStream {
     // 派生宏的处理逻辑
@@ -14,19 +15,8 @@ pub fn custom(input: TokenStream) -> TokenStream {
     // 获取结构体的名称
     let struct_name = str_list.get(1).unwrap();
 
-    println!("{}", struct_name);
+    println!("struct_name {}", struct_name);
 
-    // format!("struct MyStruct");
-
-    // let output = quote! {
-    //     impl std::fmt::Debug for MyStruct {
-    //         fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-    //             write!(f, "MyStruct {{ /* fields here */ }}")
-    //         }
-    //     }
-    // };
-    // output.into()
-    // input
     let s = format!(r#"impl {} {{
     fn my_debug(&self) {{
         println!("{} 的自定义的派生宏!");
