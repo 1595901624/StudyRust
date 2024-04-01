@@ -5,6 +5,8 @@ use std::fmt::format;
 /// 自定义派生宏
 #[proc_macro_derive(MyDebug)]
 pub fn custom(input: TokenStream) -> TokenStream {
+    // let input: proc_macro2::TokenStream = proc_macro2::TokenStream::from(input);
+
     // 派生宏的处理逻辑
     let output = input.to_string();
     // 分割代码
