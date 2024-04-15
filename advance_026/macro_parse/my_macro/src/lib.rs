@@ -1,40 +1,32 @@
 use proc_macro::{TokenStream, TokenTree};
 use std::fmt::format;
-
+use quote::ToTokens;
+use syn::{parse_macro_input, DeriveInput};
 
 /// 自定义派生宏
 #[proc_macro_derive(MyDebug)]
 pub fn custom(input: TokenStream) -> TokenStream {
-    // let input: proc_macro2::TokenStream = proc_macro2::TokenStream::from(input);
-
     // 派生宏的处理逻辑
-    let output = input.to_string();
-    // 分割代码
-    let str_list = output.split::<&str>(" ").collect::<Vec<&str>>();
-    if str_list.len() < 1 {
-        return "".parse().unwrap();
-    }
-    // 获取结构体的名称
-    let struct_name = str_list.get(1).unwrap();
+    let ast = parse_macro_input!(input as DeriveInput);
+    let struct_name = ast.ident.to_token_stream();
 
-    println!("struct_name {}", struct_name);
+    let expand = quote::quote! {
+        impl #struct_name {
+                fn my_debug(&self) {{
+                    println!("自定义的派生宏!");
+                }}
+        }
+    };
 
-    let s = format!(r#"impl {} {{
-    fn my_debug(&self) {{
-        println!("{} 的自定义的派生宏!");
-    }}
-}}"#, struct_name, struct_name);
-    s.parse().unwrap()
+    expand.into()
 }
 
-#[proc_macro]
-pub fn my_function_macro(input: TokenStream) -> TokenStream {
-    let output = input.to_string();
-    // 定义一个函数 test_function_macro, 在函数里可以写 rust 语言。外部直接调用 test_function_macro 即可运行函数内的内容
-    let output = format!("#[allow(unused)] fn test_function_macro() {{ {} }}", input);
-    output.parse().unwrap()
-}
+#[proc_macro_attribute]
+pub fn attribute_macro(attr: TokenStream, item: TokenStream) -> TokenStream {
+    let item = syn::parse_macro_input!(item as syn::ItemFn);
 
+    item.to_token_stream().into()
+}
 // #[proc_macro]
 // pub fn script(input: TokenStream) -> TokenStream {
 //     // 解析 java 语法

@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 my_macro = { path = "my_macro" }
+syn = { version = "1.0", features = ["full"] }

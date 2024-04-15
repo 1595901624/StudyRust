@@ -7,6 +7,7 @@ name = "macro_parse"
 version = "0.1.0"
 dependencies = [
  "my_macro",
+ "syn",
 ]
 
 [[package]]
