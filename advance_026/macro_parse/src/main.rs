@@ -5,23 +5,13 @@ use syn::spanned::Spanned;
 
 fn main() {
     println!("Hello, world!");
-    let s = Student;
-    s.my_debug();
 }
 
-#[derive(MyDebug)]
-struct Student;
 
 #[attribute_macro]
 fn test_attr() {
 
 }
-
-// impl Student {
-//     fn my_debug(&self) {
-//
-//     }
-// }
 
 /// syn 解析 Rust 代码
 #[test]
