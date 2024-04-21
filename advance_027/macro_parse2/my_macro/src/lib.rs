@@ -10,7 +10,6 @@ pub fn custom(input: TokenStream) -> TokenStream {
     let ast = parse_macro_input!(input as DeriveInput);
     let struct_name = ast.ident.to_token_stream();
 
-    // 下节内容
     let expand = quote::quote! {
         impl #struct_name {
                 fn my_debug(&self) {{
