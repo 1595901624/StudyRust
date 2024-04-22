@@ -1,7 +1,7 @@
-use proc_macro::{TokenStream, TokenTree};
-use std::fmt::format;
+use proc_macro::TokenStream;
+
 use quote::ToTokens;
-use syn::{parse_macro_input, DeriveInput};
+use syn::{DeriveInput, parse_macro_input};
 
 /// 自定义派生宏
 #[proc_macro_derive(MyDebug)]
@@ -27,7 +27,7 @@ pub fn custom(input: TokenStream) -> TokenStream {
 }
 
 #[proc_macro_attribute]
-pub fn attribute_macro(attr: TokenStream, item: TokenStream) -> TokenStream {
+pub fn attribute_macro(_: TokenStream, item: TokenStream) -> TokenStream {
     let item = syn::parse_macro_input!(item as syn::ItemFn);
 
     item.to_token_stream().into()
