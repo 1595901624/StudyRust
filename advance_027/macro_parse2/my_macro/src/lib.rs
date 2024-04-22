@@ -8,16 +8,21 @@ use syn::{parse_macro_input, DeriveInput};
 pub fn custom(input: TokenStream) -> TokenStream {
     // 派生宏的处理逻辑
     let ast = parse_macro_input!(input as DeriveInput);
-    let struct_name = ast.ident.to_token_stream();
+
+    // 结构体名称 TokenStream
+    let struct_token_stream = ast.ident.to_token_stream();
+
+    // 名称字符串
+    let struct_name = struct_token_stream.to_string();
 
     let expand = quote::quote! {
-        impl #struct_name {
+        // 在代码中需要使用 TokenStream
+        impl #struct_token_stream {
                 fn my_debug(&self) {{
-                    println!("自定义的派生宏!");
+                    println!("{} 自定义的派生宏!", #struct_name);
                 }}
         }
     };
-
     expand.into()
 }
 

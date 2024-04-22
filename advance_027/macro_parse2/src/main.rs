@@ -1,6 +1,15 @@
+use my_macro::MyDebug;
+use proc_macro2::{Ident, Span};
+
 fn main() {
     println!("Hello, world!");
+
+    let student = Student;
+    student.my_debug();
 }
+
+#[derive(MyDebug)]
+struct Student;
 
 
 /// 插值
@@ -31,6 +40,17 @@ fn quote_test3() {
         quote::quote! {
             println!("Hello, {}!", #name);
         }
+    };
+    println!("expand: {}", expand);
+}
+
+#[test]
+fn quote_test4() {
+    let func_name = Ident::new("test_function", Span::call_site());
+    let expand = quote::quote! {
+       fn #func_name() {
+           println!("这是一个动态命名的函数。");
+       }
     };
     println!("expand: {}", expand);
 }
