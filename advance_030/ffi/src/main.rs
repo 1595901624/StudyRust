@@ -1,4 +1,4 @@
-use std::ffi::c_void;
+use std::ffi::{c_int, c_void};
 
 fn main() {
     println!("Hello, world!");
@@ -8,8 +8,12 @@ fn main() {
     println!("{}", b);
 
     unsafe {
-        let ptr = malloc(10 * std::mem::size_of::<i32>());
+        let ptr = malloc(1 * std::mem::size_of::<i32>());
+        let iptr = ptr as *mut i32;
+        iptr.write(15);
+        println!("{}", *iptr);
         println!("{:?}", ptr);
+        free(ptr);
 
         let b = -5;
         let c = abs(b);
@@ -17,6 +21,7 @@ fn main() {
 
         let d = getch();
         println!("{}", d);
+
     }
 }
 
@@ -24,7 +29,9 @@ fn main() {
 extern "C" {
     fn malloc(size: usize) -> *mut c_void;
 
-    fn abs(i: i32) -> i32;
+    fn free(ptr: *mut c_void);
 
-    fn getch() -> i32;
+    fn abs(i: c_int) -> c_int;
+
+    fn getch() -> c_int;
 }
