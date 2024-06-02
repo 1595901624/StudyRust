@@ -23,7 +23,6 @@ fn main() {
         // 由于 Windows 中的 c_char 类型是 i8，所以需要先将其转换为 u8 类型，再转为 char
         println!("输入的键盘字符：{}", d as u8 as char);
 
-
         // C 语言中的结构体
         let name = CString::new("张三").unwrap();
         let student = Student { id: 1, name: name.as_ptr() };
