@@ -3,4 +3,11 @@ name = "rust-lua"
 version = "0.1.0"
 edition = "2021"
 
+include = ["src/**/*", "lua/**/*.o", "lua/*.a", "build.rs"]
+
 [dependencies]
+libc = "0.2.154"
+
+[build-dependencies]
+cc = "1.0.97"
+bindgen = "0.69.4"
