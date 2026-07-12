@@ -1,0 +1,57 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.2",
+  "base_commit_sha": "9d36b1d92e72be3b6e1cf51118909491937ed30f",
+  "prompts": {},
+  "commit_stats": {
+    "git_diff_added_lines": 26,
+    "git_diff_deleted_lines": 4,
+    "ai_additions": 0,
+    "ai_accepted": 0,
+    "BYMC": 26,
+    "mixed_additions": 0,
+    "BYAC": 0,
+    "BYRC": 0,
+    "per_file": {
+      "Y2026/07/cargo-warnings-demo/.cargo/config.toml": {
+        "BYMC": [
+          "1-4"
+        ],
+        "BYAC": [],
+        "BYRC": []
+      },
+      "Y2026/07/cargo-warnings-demo/Cargo.toml": {
+        "BYMC": [
+          "1-9"
+        ],
+        "BYAC": [],
+        "BYRC": []
+      },
+      "Y2026/07/cargo-warnings-demo/src/main.rs": {
+        "BYMC": [
+          "1-4"
+        ],
+        "BYAC": [],
+        "BYRC": []
+      },
+      "other/rust185/Cargo.toml~": {
+        "BYMC": [
+          "1-6"
+        ],
+        "BYAC": [],
+        "BYRC": []
+      },
+      "other/rust185/src/main.rs": {
+        "BYMC": [
+          "12-14"
+        ],
+        "BYAC": [],
+        "BYRC": []
+      }
+    }
+  },
+  "ipa_account": "luhaoyu",
+  "commit_timestamp": 1783836929,
+  "requirement_id": ""
+}
