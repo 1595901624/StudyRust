@@ -1,0 +1,4 @@
+[build]
+# warnings = "warn"   # 默认：显示警告，但编译继续
+warnings = "allow"  # 隐藏可调级别警告
+# warnings = "deny"   # 将警告视为错误
