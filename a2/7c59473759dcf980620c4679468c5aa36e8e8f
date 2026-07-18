@@ -1,0 +1,30 @@
+Y2026/07/rust-benchmark-demo/Cargo.toml
+  s_ab6d8cb4f307ce::t_61a45fc471b709 7-13
+Y2026/07/rust-benchmark-demo/benches/sort_benchmark.rs
+  s_ab6d8cb4f307ce::t_aa65393a31a2b2 49
+  s_ab6d8cb4f307ce::t_d7382d4b5cc8ed 1,3,13
+  s_ab6d8cb4f307ce::t_61a45fc471b709 2,4,8-12,14-18,20-21,23-25,27-30,32-33,35,37-38,40-45,47-48,50-61
+  s_ab6d8cb4f307ce::t_7bbad2415e2ff4 5-7,19,22,26,31,34,36,39,46
+  s_ab6d8cb4f307ce::t_db6163284394bf 62-63
+Y2026/07/rust-benchmark-demo/src/lib.rs
+  s_ab6d8cb4f307ce::t_61a45fc471b709 4-5,20,22-29
+  s_ab6d8cb4f307ce::t_7bbad2415e2ff4 1-3,8-10,21
+  s_ab6d8cb4f307ce::t_bd1494fab07b8c 6-7
+  s_ab6d8cb4f307ce::t_7f6d6ab5128bc3 18-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "a27c59473759dcf980620c4679468c5aa36e8e8f",
+  "prompts": {},
+  "sessions": {
+    "s_ab6d8cb4f307ce": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f744f-291f-79c0-a688-c8f85c0c2c81",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "haoyu3 <haoyu3@163.com>"
+    }
+  }
+}
