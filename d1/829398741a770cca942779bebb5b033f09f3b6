@@ -1,0 +1,25 @@
+Y2026/07/clone-bench/src/main.rs
+  s_f1f8911b3f763d::t_1074fec297f3ab 1-3
+Y2026/07/clone-bench/benches/clone_cost.rs
+  s_f1f8911b3f763d::t_1074fec297f3ab 1-3,5,7-11,13,15,17-19,21-24,26-29,31-34,36-41
+  s_f1f8911b3f763d::t_1cbb820c28d5c4 4
+  s_f1f8911b3f763d::t_08287243e7c341 6,12,14,16,20,25,30,35
+Y2026/07/clone-bench/Cargo.toml
+  s_f1f8911b3f763d::t_1074fec297f3ab 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "d1829398741a770cca942779bebb5b033f09f3b6",
+  "prompts": {},
+  "sessions": {
+    "s_f1f8911b3f763d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f9232-f91f-7fd2-bb49-287328817f64",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "haoyu3 <haoyu3@163.com>"
+    }
+  }
+}
