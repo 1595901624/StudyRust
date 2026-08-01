@@ -1,0 +1,746 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+// HINT: See also -Z dump-mir for MIR at specific points during compilation.
+fn drop_order::<impl at ./src\drop_order.rs:3:1: 3:20>::drop(_1: &mut drop_order::Field) -> () {
+    debug self => _1;
+    let mut _0: ();
+    let _2: ();
+    let mut _3: std::fmt::Arguments<'_>;
+    let _4: (&&str,);
+    let mut _5: &&str;
+    let mut _7: core::fmt::rt::Argument<'_>;
+    let mut _8: &[u8; 18];
+    let _9: &[core::fmt::rt::Argument<'_>; 1];
+    let mut _10: &&str;
+    scope 1 {
+        debug args => _4;
+        let _6: [core::fmt::rt::Argument<'_>; 1];
+        scope 2 {
+            debug args => _6;
+        }
+    }
+
+    bb0: {
+        _5 = &((*_1).0: &str);
+        _4 = (move _5,);
+        _10 = no_retag copy (_4.0: &&str);
+        _7 = core::fmt::rt::Argument::<'_>::new_display::<&str>(copy _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _6 = [move _7];
+        _8 = const b"\r\xe6\x9e\x90\xe6\x9e\x84\xe5\xad\x97\xe6\xae\xb5 \xc0\x01\n\x00";
+        _9 = &_6;
+        _3 = Arguments::<'_>::new::<18, 1>(move _8, copy _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _2 = std::io::_print(move _3) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        return;
+    }
+}
+
+alloc1 (size: 18, align: 1) {
+    0x00 │ 0d e6 9e 90 e6 9e 84 e5 ad 97 e6 ae b5 20 c0 01 │ ............. ..
+    0x10 │ 0a 00                                           │ ..
+}
+
+fn drop_order::<impl at ./src\drop_order.rs:14:1: 14:24>::drop(_1: &mut Container) -> () {
+    debug self => _1;
+    let mut _0: ();
+    let _2: ();
+    let mut _3: std::fmt::Arguments<'_>;
+    let _4: (&&str, &&str);
+    let mut _5: &&str;
+    let mut _6: &&str;
+    let mut _8: core::fmt::rt::Argument<'_>;
+    let mut _9: core::fmt::rt::Argument<'_>;
+    let mut _10: &[u8; 59];
+    let _11: &[core::fmt::rt::Argument<'_>; 2];
+    let mut _12: &&str;
+    let mut _13: &&str;
+    scope 1 {
+        debug args => _4;
+        let _7: [core::fmt::rt::Argument<'_>; 2];
+        scope 2 {
+            debug args => _7;
+        }
+    }
+
+    bb0: {
+        _5 = &(((*_1).0: drop_order::Field).0: &str);
+        _6 = &(((*_1).1: drop_order::Field).0: &str);
+        _4 = (move _5, move _6);
+        _12 = no_retag copy (_4.0: &&str);
+        _8 = core::fmt::rt::Argument::<'_>::new_display::<&str>(copy _12) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _13 = no_retag copy (_4.1: &&str);
+        _9 = core::fmt::rt::Argument::<'_>::new_display::<&str>(copy _13) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _7 = [move _8, move _9];
+        _10 = const b"/\xe5\x85\x88\xe6\x89\xa7\xe8\xa1\x8c Container::drop\xef\xbc\x8c\xe6\xad\xa4\xe6\x97\xb6\xe4\xbb\x8d\xe5\x8f\xaf\xe8\xae\xbf\xe9\x97\xae \xc0\x05 \xe5\x92\x8c \xc0\x01\n\x00";
+        _11 = &_7;
+        _3 = Arguments::<'_>::new::<59, 2>(move _10, copy _11) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        _2 = std::io::_print(move _3) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        return;
+    }
+}
+
+alloc2 (size: 59, align: 1) {
+    0x00 │ 2f e5 85 88 e6 89 a7 e8 a1 8c 20 43 6f 6e 74 61 │ /......... Conta
+    0x10 │ 69 6e 65 72 3a 3a 64 72 6f 70 ef bc 8c e6 ad a4 │ iner::drop......
+    0x20 │ e6 97 b6 e4 bb 8d e5 8f af e8 ae bf e9 97 ae 20 │ ............... 
+    0x30 │ c0 05 20 e5 92 8c 20 c0 01 0a 00                │ .. ... ....
+}
+
+fn drop_order::run() -> () {
+    let mut _0: ();
+    let _1: drop_order::Container;
+    let mut _2: drop_order::Field;
+    let mut _3: drop_order::Field;
+    scope 1 {
+        debug _container => _1;
+    }
+
+    bb0: {
+        _2 = drop_order::Field(const "first");
+        _3 = drop_order::Field(const "second");
+        _1 = Container { first: move _2, second: move _3 };
+        drop(_1) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        return;
+    }
+}
+
+alloc4 (size: 6, align: 1) {
+    73 65 63 6f 6e 64                               │ second
+}
+
+alloc3 (size: 5, align: 1) {
+    66 69 72 73 74                                  │ first
+}
+
+fn early_drop::<impl at ./src\early_drop.rs:5:1: 5:23>::drop(_1: &mut Resource) -> () {
+    debug self => _1;
+    let mut _0: ();
+    let _2: ();
+    let mut _3: std::fmt::Arguments<'_>;
+    let _4: (&&str,);
+    let mut _5: &&str;
+    let mut _7: core::fmt::rt::Argument<'_>;
+    let mut _8: &[u8; 18];
+    let _9: &[core::fmt::rt::Argument<'_>; 1];
+    let mut _10: &&str;
+    scope 1 {
+        debug args => _4;
+        let _6: [core::fmt::rt::Argument<'_>; 1];
+        scope 2 {
+            debug args => _6;
+        }
+    }
+
+    bb0: {
+        _5 = &((*_1).0: &str);
+        _4 = (move _5,);
+        _10 = no_retag copy (_4.0: &&str);
+        _7 = core::fmt::rt::Argument::<'_>::new_display::<&str>(copy _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _6 = [move _7];
+        _8 = const b"\r\xe9\x87\x8a\xe6\x94\xbe\xe8\xb5\x84\xe6\xba\x90 \xc0\x01\n\x00";
+        _9 = &_6;
+        _3 = Arguments::<'_>::new::<18, 1>(move _8, copy _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _2 = std::io::_print(move _3) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        return;
+    }
+}
+
+alloc5 (size: 18, align: 1) {
+    0x00 │ 0d e9 87 8a e6 94 be e8 b5 84 e6 ba 90 20 c0 01 │ ............. ..
+    0x10 │ 0a 00                                           │ ..
+}
+
+fn early_drop::run() -> () {
+    let mut _0: ();
+    let _1: early_drop::Resource;
+    let _2: ();
+    let mut _3: std::fmt::Arguments<'_>;
+    let mut _5: &&str;
+    let mut _7: core::fmt::rt::Argument<'_>;
+    let mut _8: &[u8; 32];
+    let _9: &[core::fmt::rt::Argument<'_>; 1];
+    let _10: ();
+    let mut _11: early_drop::Resource;
+    let _12: ();
+    let mut _13: std::fmt::Arguments<'_>;
+    let mut _14: &&str;
+    let mut _15: bool;
+    scope 1 {
+        debug resource => _1;
+        let _4: (&&str,);
+        scope 2 {
+            debug args => _4;
+            let _6: [core::fmt::rt::Argument<'_>; 1];
+            scope 3 {
+                debug args => _6;
+            }
+        }
+    }
+
+    bb0: {
+        _15 = const false;
+        _15 = const true;
+        _1 = Resource { name: const "log-file" };
+        _5 = &(_1.0: &str);
+        _4 = (move _5,);
+        _14 = no_retag copy (_4.0: &&str);
+        _7 = core::fmt::rt::Argument::<'_>::new_display::<&str>(copy _14) -> [return: bb1, unwind: bb9];
+    }
+
+    bb1: {
+        _6 = [move _7];
+        _8 = const b"\x1b\xe8\xb5\x84\xe6\xba\x90\xe4\xbb\x8d\xe7\x84\xb6\xe5\x8f\xaf\xe4\xbb\xa5\xe4\xbd\xbf\xe7\x94\xa8\xef\xbc\x9a\xc0\x01\n\x00";
+        _9 = &_6;
+        _3 = Arguments::<'_>::new::<32, 1>(move _8, copy _9) -> [return: bb2, unwind: bb9];
+    }
+
+    bb2: {
+        _2 = std::io::_print(move _3) -> [return: bb3, unwind: bb9];
+    }
+
+    bb3: {
+        _15 = const false;
+        _11 = move _1;
+        _10 = std::mem::drop::<Resource>(move _11) -> [return: bb4, unwind: bb9];
+    }
+
+    bb4: {
+        _13 = Arguments::<'_>::from_str(const "resource 已经提前析构\n") -> [return: bb5, unwind: bb9];
+    }
+
+    bb5: {
+        _12 = std::io::_print(move _13) -> [return: bb6, unwind: bb9];
+    }
+
+    bb6: {
+        _15 = const false;
+        return;
+    }
+
+    bb7 (cleanup): {
+        resume;
+    }
+
+    bb8 (cleanup): {
+        drop(_1) -> [return: bb7, unwind terminate(cleanup)];
+    }
+
+    bb9 (cleanup): {
+        switchInt(copy _15) -> [0: bb7, otherwise: bb8];
+    }
+}
+
+alloc8 (size: 28, align: 1) {
+    0x00 │ 72 65 73 6f 75 72 63 65 20 e5 b7 b2 e7 bb 8f e6 │ resource .......
+    0x10 │ 8f 90 e5 89 8d e6 9e 90 e6 9e 84 0a             │ ............
+}
+
+alloc7 (size: 32, align: 1) {
+    0x00 │ 1b e8 b5 84 e6 ba 90 e4 bb 8d e7 84 b6 e5 8f af │ ................
+    0x10 │ e4 bb a5 e4 bd bf e7 94 a8 ef bc 9a c0 01 0a 00 │ ................
+}
+
+alloc6 (size: 8, align: 1) {
+    6c 6f 67 2d 66 69 6c 65                         │ log-file
+}
+
+fn option_take::<impl at ./src\option_take.rs:6:1: 6:21>::drop(_1: &mut Handle) -> () {
+    debug self => _1;
+    let mut _0: ();
+    let _2: ();
+    let mut _3: std::fmt::Arguments<'_>;
+    let _4: (&u32,);
+    let mut _5: &u32;
+    let mut _7: core::fmt::rt::Argument<'_>;
+    let mut _8: &[u8; 27];
+    let _9: &[core::fmt::rt::Argument<'_>; 1];
+    let mut _10: &u32;
+    scope 1 {
+        debug args => _4;
+        let _6: [core::fmt::rt::Argument<'_>; 1];
+        scope 2 {
+            debug args => _6;
+        }
+    }
+
+    bb0: {
+        _5 = &((*_1).0: u32);
+        _4 = (move _5,);
+        _10 = no_retag copy (_4.0: &u32);
+        _7 = core::fmt::rt::Argument::<'_>::new_display::<u32>(copy _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _6 = [move _7];
+        _8 = const b"\x162. \xe9\x87\x8a\xe6\x94\xbe\xe5\xba\x95\xe5\xb1\x82\xe5\x8f\xa5\xe6\x9f\x84 \xc0\x01\n\x00";
+        _9 = &_6;
+        _3 = Arguments::<'_>::new::<27, 1>(move _8, copy _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _2 = std::io::_print(move _3) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        return;
+    }
+}
+
+alloc9 (size: 27, align: 1) {
+    0x00 │ 16 32 2e 20 e9 87 8a e6 94 be e5 ba 95 e5 b1 82 │ .2. ............
+    0x10 │ e5 8f a5 e6 9f 84 20 c0 01 0a 00                │ ...... ....
+}
+
+fn option_take::<impl at ./src\option_take.rs:18:1: 18:25>::drop(_1: &mut option_take::Connection) -> () {
+    debug self => _1;
+    let mut _0: ();
+    let mut _2: std::option::Option<option_take::Handle>;
+    let mut _3: &mut std::option::Option<option_take::Handle>;
+    let mut _4: isize;
+    let _6: ();
+    let mut _7: std::fmt::Arguments<'_>;
+    let mut _9: &std::string::String;
+    let mut _11: core::fmt::rt::Argument<'_>;
+    let mut _12: &[u8; 21];
+    let _13: &[core::fmt::rt::Argument<'_>; 1];
+    let _14: ();
+    let mut _15: option_take::Handle;
+    let mut _16: &std::string::String;
+    let mut _17: bool;
+    scope 1 {
+        debug handle => _5;
+        let _5: option_take::Handle;
+        let _8: (&std::string::String,);
+        scope 2 {
+            debug args => _8;
+            let _10: [core::fmt::rt::Argument<'_>; 1];
+            scope 3 {
+                debug args => _10;
+            }
+        }
+    }
+
+    bb0: {
+        _17 = const false;
+        _3 = &mut ((*_1).1: std::option::Option<option_take::Handle>);
+        _2 = Option::<Handle>::take(move _3) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _4 = discriminant(_2);
+        switchInt(move _4) -> [1: bb2, 0: bb8, otherwise: bb11];
+    }
+
+    bb2: {
+        _17 = const true;
+        _5 = move ((_2 as Some).0: option_take::Handle);
+        _9 = &((*_1).0: std::string::String);
+        _8 = (move _9,);
+        _16 = no_retag copy (_8.0: &std::string::String);
+        _11 = core::fmt::rt::Argument::<'_>::new_display::<String>(copy _16) -> [return: bb3, unwind: bb10];
+    }
+
+    bb3: {
+        _10 = [move _11];
+        _12 = const b"\x101. \xe5\x85\xb3\xe9\x97\xad\xe8\xbf\x9e\xe6\x8e\xa5 \xc0\x01\n\x00";
+        _13 = &_10;
+        _7 = Arguments::<'_>::new::<21, 1>(move _12, copy _13) -> [return: bb4, unwind: bb10];
+    }
+
+    bb4: {
+        _6 = std::io::_print(move _7) -> [return: bb5, unwind: bb10];
+    }
+
+    bb5: {
+        _17 = const false;
+        _15 = move _5;
+        _14 = std::mem::drop::<Handle>(move _15) -> [return: bb6, unwind: bb10];
+    }
+
+    bb6: {
+        _17 = const false;
+        goto -> bb8;
+    }
+
+    bb7 (cleanup): {
+        resume;
+    }
+
+    bb8: {
+        return;
+    }
+
+    bb9 (cleanup): {
+        drop(_5) -> [return: bb7, unwind terminate(cleanup)];
+    }
+
+    bb10 (cleanup): {
+        switchInt(copy _17) -> [0: bb7, otherwise: bb9];
+    }
+
+    bb11: {
+        unreachable;
+    }
+}
+
+alloc10 (size: 21, align: 1) {
+    0x00 │ 10 31 2e 20 e5 85 b3 e9 97 ad e8 bf 9e e6 8e a5 │ .1. ............
+    0x10 │ 20 c0 01 0a 00                                  │  ....
+}
+
+fn option_take::run() -> () {
+    let mut _0: ();
+    let _1: option_take::Connection;
+    let mut _2: std::string::String;
+    let mut _3: std::option::Option<option_take::Handle>;
+    let mut _4: option_take::Handle;
+    scope 1 {
+        debug _connection => _1;
+    }
+
+    bb0: {
+        _2 = <String as From<&str>>::from(const "cache") -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _4 = Handle { id: const 21_u32 };
+        _3 = Option::<Handle>::Some(move _4);
+        _1 = option_take::Connection { name: move _2, handle: move _3 };
+        drop(_1) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        return;
+    }
+}
+
+alloc11 (size: 5, align: 1) {
+    63 61 63 68 65                                  │ cache
+}
+
+fn two_phase::<impl at ./src\two_phase.rs:6:1: 6:21>::drop(_1: &mut Socket) -> () {
+    debug self => _1;
+    let mut _0: ();
+    let _2: ();
+    let mut _3: std::fmt::Arguments<'_>;
+    let _4: (&u32,);
+    let mut _5: &u32;
+    let mut _7: core::fmt::rt::Argument<'_>;
+    let mut _8: &[u8; 44];
+    let _9: &[core::fmt::rt::Argument<'_>; 1];
+    let mut _10: &u32;
+    scope 1 {
+        debug args => _4;
+        let _6: [core::fmt::rt::Argument<'_>; 1];
+        scope 2 {
+            debug args => _6;
+        }
+    }
+
+    bb0: {
+        _5 = &((*_1).0: u32);
+        _4 = (move _5,);
+        _10 = no_retag copy (_4.0: &u32);
+        _7 = core::fmt::rt::Argument::<'_>::new_display::<u32>(copy _10) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _6 = [move _7];
+        _8 = const b"\'2. \xe6\x89\xa7\xe8\xa1\x8c Socket::drop\xef\xbc\x8c\xe9\x87\x8a\xe6\x94\xbe socket \xc0\x01\n\x00";
+        _9 = &_6;
+        _3 = Arguments::<'_>::new::<44, 1>(move _8, copy _9) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _2 = std::io::_print(move _3) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        return;
+    }
+}
+
+alloc15 (size: 44, align: 1) {
+    0x00 │ 27 32 2e 20 e6 89 a7 e8 a1 8c 20 53 6f 63 6b 65 │ '2. ...... Socke
+    0x10 │ 74 3a 3a 64 72 6f 70 ef bc 8c e9 87 8a e6 94 be │ t::drop.........
+    0x20 │ 20 73 6f 63 6b 65 74 20 c0 01 0a 00             │  socket ....
+}
+
+fn two_phase::<impl at ./src\two_phase.rs:18:1: 18:25>::drop(_1: &mut two_phase::Connection) -> () {
+    debug self => _1;
+    let mut _0: ();
+    let _2: ();
+    let mut _3: std::fmt::Arguments<'_>;
+    let _4: (&std::string::String, &u32);
+    let mut _5: &std::string::String;
+    let mut _6: &u32;
+    let mut _8: core::fmt::rt::Argument<'_>;
+    let mut _9: core::fmt::rt::Argument<'_>;
+    let mut _10: &[u8; 69];
+    let _11: &[core::fmt::rt::Argument<'_>; 2];
+    let mut _12: &std::string::String;
+    let mut _13: &u32;
+    scope 1 {
+        debug args => _4;
+        let _7: [core::fmt::rt::Argument<'_>; 2];
+        scope 2 {
+            debug args => _7;
+        }
+    }
+
+    bb0: {
+        _5 = &((*_1).0: std::string::String);
+        _6 = &(((*_1).1: two_phase::Socket).0: u32);
+        _4 = (move _5, move _6);
+        _12 = no_retag copy (_4.0: &std::string::String);
+        _8 = core::fmt::rt::Argument::<'_>::new_display::<String>(copy _12) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _13 = no_retag copy (_4.1: &u32);
+        _9 = core::fmt::rt::Argument::<'_>::new_display::<u32>(copy _13) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _7 = [move _8, move _9];
+        _10 = const b"-1. \xe6\x89\xa7\xe8\xa1\x8c Connection::drop\xef\xbc\x8c\xe8\xbf\x9e\xe6\x8e\xa5\xe5\x90\x8d\xe7\xa7\xb0\xe4\xb8\xba \xc0\x11\xef\xbc\x8csocket id \xe4\xb8\xba \xc0\x01\n\x00";
+        _11 = &_7;
+        _3 = Arguments::<'_>::new::<69, 2>(move _10, copy _11) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        _2 = std::io::_print(move _3) -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        return;
+    }
+}
+
+alloc16 (size: 69, align: 1) {
+    0x00 │ 2d 31 2e 20 e6 89 a7 e8 a1 8c 20 43 6f 6e 6e 65 │ -1. ...... Conne
+    0x10 │ 63 74 69 6f 6e 3a 3a 64 72 6f 70 ef bc 8c e8 bf │ ction::drop.....
+    0x20 │ 9e e6 8e a5 e5 90 8d e7 a7 b0 e4 b8 ba 20 c0 11 │ ............. ..
+    0x30 │ ef bc 8c 73 6f 63 6b 65 74 20 69 64 20 e4 b8 ba │ ...socket id ...
+    0x40 │ 20 c0 01 0a 00                                  │  ....
+}
+
+fn two_phase::run() -> () {
+    let mut _0: ();
+    let _1: two_phase::Connection;
+    let mut _2: std::string::String;
+    let mut _3: two_phase::Socket;
+    let _4: ();
+    let mut _5: std::fmt::Arguments<'_>;
+    let mut _7: &std::string::String;
+    let mut _9: core::fmt::rt::Argument<'_>;
+    let mut _10: &[u8; 24];
+    let _11: &[core::fmt::rt::Argument<'_>; 1];
+    let mut _12: &std::string::String;
+    scope 1 {
+        debug connection => _1;
+        let _6: (&std::string::String,);
+        scope 2 {
+            debug args => _6;
+            let _8: [core::fmt::rt::Argument<'_>; 1];
+            scope 3 {
+                debug args => _8;
+            }
+        }
+    }
+
+    bb0: {
+        _2 = <String as From<&str>>::from(const "database") -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _3 = Socket { id: const 7_u32 };
+        _1 = two_phase::Connection { name: move _2, socket: move _3 };
+        _7 = &(_1.0: std::string::String);
+        _6 = (move _7,);
+        _12 = no_retag copy (_6.0: &std::string::String);
+        _9 = core::fmt::rt::Argument::<'_>::new_display::<String>(copy _12) -> [return: bb2, unwind: bb6];
+    }
+
+    bb2: {
+        _8 = [move _9];
+        _10 = const b"\x13\xe6\xad\xa3\xe5\x9c\xa8\xe4\xbd\xbf\xe7\x94\xa8\xe8\xbf\x9e\xe6\x8e\xa5 \xc0\x01\n\x00";
+        _11 = &_8;
+        _5 = Arguments::<'_>::new::<24, 1>(move _10, copy _11) -> [return: bb3, unwind: bb6];
+    }
+
+    bb3: {
+        _4 = std::io::_print(move _5) -> [return: bb4, unwind: bb6];
+    }
+
+    bb4: {
+        drop(_1) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        return;
+    }
+
+    bb6 (cleanup): {
+        drop(_1) -> [return: bb7, unwind terminate(cleanup)];
+    }
+
+    bb7 (cleanup): {
+        resume;
+    }
+}
+
+alloc18 (size: 24, align: 1) {
+    0x00 │ 13 e6 ad a3 e5 9c a8 e4 bd bf e7 94 a8 e8 bf 9e │ ................
+    0x10 │ e6 8e a5 20 c0 01 0a 00                         │ ... ....
+}
+
+alloc17 (size: 8, align: 1) {
+    64 61 74 61 62 61 73 65                         │ database
+}
+
+fn main() -> () {
+    let mut _0: ();
+    let _1: ();
+    let mut _2: std::fmt::Arguments<'_>;
+    let _3: ();
+    let _4: ();
+    let mut _5: std::fmt::Arguments<'_>;
+    let _6: ();
+    let _7: ();
+    let mut _8: std::fmt::Arguments<'_>;
+    let _9: ();
+    let _10: ();
+    let mut _11: std::fmt::Arguments<'_>;
+    let _12: ();
+
+    bb0: {
+        _2 = Arguments::<'_>::from_str(const "=== 1. Drop::drop 与字段析构的两个阶段 ===\n") -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _1 = std::io::_print(move _2) -> [return: bb2, unwind continue];
+    }
+
+    bb2: {
+        _3 = two_phase::run() -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        _5 = Arguments::<'_>::from_str(const "\n=== 2. 使用 Option::take 安全取出字段 ===\n") -> [return: bb4, unwind continue];
+    }
+
+    bb4: {
+        _4 = std::io::_print(move _5) -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        _6 = option_take::run() -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        _8 = Arguments::<'_>::from_str(const "\n=== 3. 结构体字段的析构顺序 ===\n") -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        _7 = std::io::_print(move _8) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        _9 = drop_order::run() -> [return: bb9, unwind continue];
+    }
+
+    bb9: {
+        _11 = Arguments::<'_>::from_str(const "\n=== 4. 使用 std::mem::drop 提前结束所有权 ===\n") -> [return: bb10, unwind continue];
+    }
+
+    bb10: {
+        _10 = std::io::_print(move _11) -> [return: bb11, unwind continue];
+    }
+
+    bb11: {
+        _12 = early_drop::run() -> [return: bb12, unwind continue];
+    }
+
+    bb12: {
+        return;
+    }
+}
+
+alloc22 (size: 56, align: 1) {
+    0x00 │ 0a 3d 3d 3d 20 34 2e 20 e4 bd bf e7 94 a8 20 73 │ .=== 4. ...... s
+    0x10 │ 74 64 3a 3a 6d 65 6d 3a 3a 64 72 6f 70 20 e6 8f │ td::mem::drop ..
+    0x20 │ 90 e5 89 8d e7 bb 93 e6 9d 9f e6 89 80 e6 9c 89 │ ................
+    0x30 │ e6 9d 83 20 3d 3d 3d 0a                         │ ... ===.
+}
+
+alloc21 (size: 43, align: 1) {
+    0x00 │ 0a 3d 3d 3d 20 33 2e 20 e7 bb 93 e6 9e 84 e4 bd │ .=== 3. ........
+    0x10 │ 93 e5 ad 97 e6 ae b5 e7 9a 84 e6 9e 90 e6 9e 84 │ ................
+    0x20 │ e9 a1 ba e5 ba 8f 20 3d 3d 3d 0a                │ ...... ===.
+}
+
+alloc20 (size: 51, align: 1) {
+    0x00 │ 0a 3d 3d 3d 20 32 2e 20 e4 bd bf e7 94 a8 20 4f │ .=== 2. ...... O
+    0x10 │ 70 74 69 6f 6e 3a 3a 74 61 6b 65 20 e5 ae 89 e5 │ ption::take ....
+    0x20 │ 85 a8 e5 8f 96 e5 87 ba e5 ad 97 e6 ae b5 20 3d │ .............. =
+    0x30 │ 3d 3d 0a                                        │ ==.
+}
+
+alloc19 (size: 53, align: 1) {
+    0x00 │ 3d 3d 3d 20 31 2e 20 44 72 6f 70 3a 3a 64 72 6f │ === 1. Drop::dro
+    0x10 │ 70 20 e4 b8 8e e5 ad 97 e6 ae b5 e6 9e 90 e6 9e │ p ..............
+    0x20 │ 84 e7 9a 84 e4 b8 a4 e4 b8 aa e9 98 b6 e6 ae b5 │ ................
+    0x30 │ 20 3d 3d 3d 0a                                  │  ===.
+}
+
+fn drop_order::Field(_1: &str) -> drop_order::Field {
+    let mut _0: drop_order::Field;
+
+    bb0: {
+        _0 = drop_order::Field(move _1);
+        return;
+    }
+}
+
+// MIR FOR CTFE
+fn drop_order::Field(_1: &str) -> drop_order::Field {
+    let mut _0: drop_order::Field;
+
+    bb0: {
+        _0 = drop_order::Field(move _1);
+        return;
+    }
+}

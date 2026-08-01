@@ -26,6 +26,6 @@ pub fn run() {
         second: Field("second"),
     };
 
-    // 结构体先执行自己的 Drop::drop。
-    // 方法返回后，字段按照声明顺序析构：先 first，再 second。
+    // 结构体先执行自己的 Drop::drop
+    // 方法返回后，字段按照声明顺序析构：先 first，再 second
 }
