@@ -1,0 +1,37 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.0.8",
+  "base_commit_sha": "c2a8cb1b4e19488cf9eae6703b5b9f665151df03",
+  "prompts": {},
+  "commit_stats": {
+    "git_diff_added_lines": 8,
+    "git_diff_deleted_lines": 39,
+    "ai_additions": 0,
+    "ai_accepted": 0,
+    "BYMC": 8,
+    "mixed_additions": 0,
+    "BYAC": 0,
+    "BYRC": 0,
+    "per_file": {
+      "Y2026/08/const-fn-compile-time-demo/src/bin/const-block.rs": {
+        "BYMC": [
+          "1-2",
+          "7-9"
+        ],
+        "BYAC": [],
+        "BYRC": []
+      },
+      "Y2026/08/const-fn-compile-time-demo/src/bin/runtime-call.rs": {
+        "BYMC": [
+          "10-12"
+        ],
+        "BYAC": [],
+        "BYRC": []
+      }
+    }
+  },
+  "ipa_account": "luhaoyu",
+  "commit_timestamp": 1786180027,
+  "requirement_id": ""
+}
