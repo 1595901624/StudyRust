@@ -1,9 +1,10 @@
-const fn build_mask(bits: u32) -> u32 {
-    (1_u32 << bits) - 1
+const fn calculate(x: u64) -> u64 {
+    x.wrapping_mul(31).wrapping_add(7)
 }
 
 fn main() {
     // `const {}` 明确要求这一段在编译期完成求值
-    let mask = const { build_mask(8) };
-    println!("{mask:#010b}");
+    let input = const { calculate(10) };
+
+    println!("{}", input);
 }
