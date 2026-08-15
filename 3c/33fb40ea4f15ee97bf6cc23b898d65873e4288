@@ -1,0 +1,35 @@
+Y2026/08/polonius-alpha-demo/examples/rejected_by_nll.rs
+  s_eb1fbb21e4f657::t_0476db2f6cc20d 4,21
+  s_eb1fbb21e4f657::t_71d13aea6b46c3 1-3,5-20,22-24
+Y2026/08/polonius-alpha-demo/src/main.rs
+  s_eb1fbb21e4f657::t_af57a1f731116f 4-7
+  s_eb1fbb21e4f657::t_71d13aea6b46c3 1-3,8-25
+Y2026/08/polonius-alpha-demo/Cargo.toml
+  s_eb1fbb21e4f657::t_71d13aea6b46c3 1-6
+Y2026/08/polonius-alpha-demo/README.md
+  s_eb1fbb21e4f657::t_71d13aea6b46c3 1-19,27-34
+  s_eb1fbb21e4f657::t_5ea8cc895cd9dd 20-26
+Y2026/08/polonius-alpha-demo/snippets/get_mut_or_default_polonius.rs
+  s_eb1fbb21e4f657::t_71d13aea6b46c3 1-19
+Y2026/08/polonius-alpha-demo/snippets/get_mut_or_default_entry.rs
+  s_eb1fbb21e4f657::t_71d13aea6b46c3 1-3,8-13
+  s_eb1fbb21e4f657::t_af57a1f731116f 4-7
+Y2026/08/polonius-alpha-demo/Cargo.lock
+  s_eb1fbb21e4f657::t_c12eea3c4a1af3 1-7
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "3c33fb40ea4f15ee97bf6cc23b898d65873e4288",
+  "prompts": {},
+  "sessions": {
+    "s_eb1fbb21e4f657": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a00604-7ac7-7513-8ccd-e93d4548d952",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "haoyu3 <haoyu3@163.com>"
+    }
+  }
+}
